@@ -1,0 +1,20 @@
+.crear-propiedad {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .crear-propiedad input,
+  .crear-propiedad textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .crear-propiedad button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
