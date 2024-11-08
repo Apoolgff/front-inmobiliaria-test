@@ -1,0 +1,32 @@
+/* UserNavbar.css */
+
+.user-navbar ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: rgb(75, 75, 75);
+}
+
+.user-navbar li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.user-navbar a, .logout-button-link {
+    text-decoration: none;
+    color: #ffffff; /* Color del enlace */
+    font-size: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.user-navbar a:hover, .logout-button-link:hover {
+    color: #ffffff; /* Color de hover */
+}
+
+.logout-button-link {
+    background: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}

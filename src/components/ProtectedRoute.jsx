@@ -1,20 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../services/authContext';
 
 const ProtectedRoute = ({ children }) => {
-    const { isAuthenticated, loading } = useAuth();
+    const { isAuthenticated, loading, sessionExpired, setSessionExpired } = useAuth();
 
-    // Si aún estamos cargando el estado de autenticación, mostramos un mensaje de carga
+    useEffect(() => {
+        if (sessionExpired) {
+            alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+            setSessionExpired(false); // Reiniciar el estado para que no se repita la alerta
+        }
+    }, [sessionExpired, setSessionExpired]);
+
     if (loading) {
-        return <p>Loading...</p>;  // Puedes reemplazar esto con un componente de carga si prefieres
+        return <p>Loading...</p>;
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" />;  // Redirige al login si no está autenticado
+        return <Navigate to="/login" />;
     }
+    if (sessionExpired) {
+    alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+    setSessionExpired(false); // Reinicia el estado
+    return <Navigate to="/login" />;
+}
 
-    return children;  // Si está autenticado, renderiza el contenido protegido
+
+    return children;
 };
 
 export default ProtectedRoute;

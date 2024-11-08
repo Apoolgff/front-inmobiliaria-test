@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
 
         checkAuthStatus(); // Llamar a la función para verificar el estado de autenticación
     }, []);
+    
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading }}>
