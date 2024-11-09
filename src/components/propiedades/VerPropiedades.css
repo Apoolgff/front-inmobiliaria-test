@@ -1,21 +1,50 @@
 .ver-propiedades {
     display: flex;
+    flex-direction: column;
+  }
+
+  .ver-propiedades h2{
+    margin-bottom: 50px;
+    color: rgb(5, 5, 110);
+    font-weight: bold;
+    font-size: 45px;
   }
   .lista-propiedades {
     width: 50%;
   }
-  .card-propiedad {
+  .propiedad-card {
     border: 1px solid #ccc;
     padding: 15px;
     margin: 10px 0;
     border-radius: 5px;
+    max-width: 500px;
   }
-  .card-propiedad button {
+  .propiedad-card h3{
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(200, 2, 2);
+  }
+  .propiedad-card p span{
+    font-size: 20px;
+    font-weight: bold;
+
+  }
+  .propiedad-card button {
     background-color: #4CAF50;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
   }
+
+  .propiedad-card button a{
+    text-decoration: none; /* Elimina el subrayado */
+    color: inherit; /* Hereda el color del texto del contenedor */
+    font-weight: normal; /* Si es necesario, asegúrate de que no tenga un estilo de enlace en negrita */
+    font-weight: bold;
+  }
+
+  
   

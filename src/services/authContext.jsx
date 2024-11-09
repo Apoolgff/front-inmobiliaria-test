@@ -1,34 +1,47 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
+const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(null); // null indica que estamos verificando el estado
-    const [loading, setLoading] = useState(true); // Para manejar el estado de carga mientras verificamos el token
+const AuthProvider = ({ children }) => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         const checkAuthStatus = async () => {
-            try {
-                // Intentar obtener el usuario actual desde el backend
-                await axios.get(`${import.meta.env.VITE_BACKEND_URL}/usuarios/current`, { withCredentials: true });
-                setIsAuthenticated(true);  // Si tiene sesión activa
-            } catch {
-                setIsAuthenticated(false);  // Si no está autenticado
-            } finally {
-                setLoading(false);  // Una vez que se ha terminado la verificación
+            // Solo verificar si no estamos en la página de login y despues colocar las otras rutas
+            if (window.location.pathname !== "/login") {
+                try {
+                    const response = await axios.get(
+                        `${import.meta.env.VITE_BACKEND_URL}/usuarios/current`,
+                        {
+                            withCredentials: true,  // Le indica al navegador que envíe las cookies
+                        }
+                    );
+
+                    setIsAuthenticated(true);
+                    setUserData(response.data); // Datos del usuario
+                } catch (err) {
+                    console.error('Error al verificar token:', err);
+                    setIsAuthenticated(false); // Si falla la validación del token
+                }
             }
+
+            setLoading(false);
         };
 
-        checkAuthStatus(); // Llamar a la función para verificar el estado de autenticación
-    }, []);
-    
+        checkAuthStatus(); // Verificar estado de autenticación al cargar el componente
+    }, []); // Solo se ejecuta una vez cuando el componente se monta
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading }}>
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, userData }}>
             {children}
         </AuthContext.Provider>
     );
 };
+
+export { useAuth, AuthProvider };

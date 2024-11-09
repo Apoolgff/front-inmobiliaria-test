@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './CrearPropiedad.css';
 import UserNavBar from '../usuarios/UserNavbar';
+import { useAuth } from '../../services/authContext';
 
-const CrearPropiedad = ({ userId }) => {
+const CrearPropiedad = () => {
+    const { userData } = useAuth();
     const [propiedad, setPropiedad] = useState({
         propietario: '',
         propietarioTipo: 'Usuarios',
@@ -17,7 +19,7 @@ const CrearPropiedad = ({ userId }) => {
         descripcion: '',
         destacada: false,
         url: '',
-        ubicacion: {
+        Ubicacion: {
             departamento: '',
             ciudad: '',
             barrio: '',
@@ -27,7 +29,7 @@ const CrearPropiedad = ({ userId }) => {
             lat: '',
             lon: ''
         },
-        caracteristicas: {
+        Caracteristicas: {
             parrillero: '',
             playroom: '',
             mucamas: '',
@@ -112,7 +114,7 @@ const CrearPropiedad = ({ userId }) => {
         setSuccess('');
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/propiedades/usuario/${userId}`, propiedad, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/propiedades/usuario/${userData._id}`, propiedad, {
                 withCredentials: true,
             });
             if (response.status === 201) {
@@ -136,26 +138,26 @@ const CrearPropiedad = ({ userId }) => {
                 <textarea name="descripcion" placeholder="Descripción" value={propiedad.descripcion} onChange={handleChange} />
 
                 <h2>Ubicación</h2>
-                {Object.keys(propiedad.ubicacion).map((key) => (
+                {Object.keys(propiedad.Ubicacion).map((key) => (
                     <input
                         key={key}
                         type="text"
                         name={key}
                         placeholder={key}
-                        value={propiedad.ubicacion[key]}
-                        onChange={(e) => handleChange(e, 'ubicacion')}
+                        value={propiedad.Ubicacion[key]}
+                        onChange={(e) => handleChange(e, 'Ubicacion')}
                     />
                 ))}
 
                 <h2>Características</h2>
-                {Object.keys(propiedad.caracteristicas).map((key) => (
+                {Object.keys(propiedad.Caracteristicas).map((key) => (
                     <input
                         key={key}
                         type="text"
                         name={key}
                         placeholder={key}
-                        value={propiedad.caracteristicas[key]}
-                        onChange={(e) => handleChange(e, 'caracteristicas')}
+                        value={propiedad.Caracteristicas[key]}
+                        onChange={(e) => handleChange(e, 'Caracteristicas')}
                     />
                 ))}
 
