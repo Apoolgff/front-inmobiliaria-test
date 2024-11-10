@@ -8,6 +8,7 @@ import Dashboard from './components/usuarios/Dashboard';
 import CrearPropiedad from './components/propiedades/CrearPropiedad';
 import VerPropiedades from './components/propiedades/VerPropiedades';
 import VerPropiedad from './components/propiedades/VerPropiedad';
+import ModificarPropiedad from './components/propiedades/ModificarPropiedad'
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './services/authContext';  // Aquí importas el AuthProvider
 
@@ -22,7 +23,7 @@ function App() {
                         <Route path="/registro" element={<Registro />} />
                         <Route path="/registro/usuario" element={<RegistroUsuario />} />
                         <Route path="/registro/inmobiliaria" element={<RegistroInmobiliaria />} />
-                        
+
                         {/* Rutas protegidas */}
                         <Route
                             path="/dashboard"
@@ -56,6 +57,12 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route
+                            path="/modificar-propiedad/:id"
+                            element={
+                                <ProtectedRoute>
+                                    <ModificarPropiedad />
+                                </ProtectedRoute>} />
                     </Routes>
                 </div>
             </Router>

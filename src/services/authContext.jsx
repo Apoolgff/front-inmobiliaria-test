@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
         };
 
         checkAuthStatus(); // Verificar estado de autenticación al cargar el componente
-    }, []); // Solo se ejecuta una vez cuando el componente se monta
+    }, [2]); // Solo se ejecuta una vez cuando el componente se monta
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, userData }}>

@@ -54,7 +54,7 @@ const VerPropiedad = () => {
                 <p><span>Renta: </span>{propiedad.venta.renta}</p>
                 <p><span>Porcentaje Renta: </span>{propiedad.venta.porcentajerenta}</p>
                 <p><span>Saldo de Banco: </span>{propiedad.venta.saldobanco}</p>
-                <p><span>Acepta mascotas: </span>{propiedad.alquiler.aceptaMascota}</p>
+                
 
                 <h3>Ubicacion</h3>
                 <p><span>Departamento: </span>{propiedad.Ubicacion.departamento}</p>
