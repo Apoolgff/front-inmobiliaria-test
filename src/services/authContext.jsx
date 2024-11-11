@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             // Solo verificar si no estamos en la página de login y despues colocar las otras rutas
-            if (window.location.pathname !== "/login") {
+            if (window.location.pathname !== "/login" && window.location.pathname !== "/") {
                 try {
                     const response = await axios.get(
                         `${import.meta.env.VITE_BACKEND_URL}/usuarios/current`,
@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
         };
 
         checkAuthStatus(); // Verificar estado de autenticación al cargar el componente
-    }, [2]); // Solo se ejecuta una vez cuando el componente se monta
+    }, []); // Solo se ejecuta una vez cuando el componente se monta
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, userData }}>

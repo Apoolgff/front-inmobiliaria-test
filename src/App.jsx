@@ -9,6 +9,7 @@ import CrearPropiedad from './components/propiedades/CrearPropiedad';
 import VerPropiedades from './components/propiedades/VerPropiedades';
 import VerPropiedad from './components/propiedades/VerPropiedad';
 import ModificarPropiedad from './components/propiedades/ModificarPropiedad'
+import CrearPublicacion from './components/publicaciones/CrearPublicacion'
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './services/authContext';  // Aquí importas el AuthProvider
 
@@ -63,6 +64,13 @@ function App() {
                                 <ProtectedRoute>
                                     <ModificarPropiedad />
                                 </ProtectedRoute>} />
+                        <Route
+                            path="/crear-publicacion"
+                            element={
+                                <ProtectedRoute>
+                                    <CrearPublicacion />
+                                </ProtectedRoute>} />
+                                
                     </Routes>
                 </div>
             </Router>

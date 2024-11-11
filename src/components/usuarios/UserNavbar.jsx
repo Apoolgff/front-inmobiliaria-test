@@ -32,6 +32,9 @@ const UserNavbar = () => {
                     <Link to="/ver-propiedades">Ver Propiedades</Link>
                 </li>
                 <li>
+                    <Link to="/crear-publicacion">Publicar</Link>
+                </li>
+                <li>
                     {/* El botón de logout ahora se ve como un enlace */}
                     <button onClick={handleLogout} className="logout-button-link">Cerrar sesión</button>
                 </li>

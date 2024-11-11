@@ -20,6 +20,7 @@ const Login = () => {
                 `${import.meta.env.VITE_BACKEND_URL}/usuarios/login`,
                 { email, password },
                 { withCredentials: true }
+                
             );
 
             if (response.status === 200) {
