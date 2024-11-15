@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './CrearPropiedad.css';
-import UserNavBar from '../usuarios/UserNavbar';
+import '../propiedades/CrearPropiedad.css';
 import { useAuth } from '../../services/authContext';
 
-const CrearPropiedad = () => {
+const PublicarCasa = () => {
     const { userData } = useAuth();
     const [propiedad, setPropiedad] = useState({
         propietario: '',
         propietarioTipo: 'Usuarios',
-        tipo: '',
+        tipo: 'Casa',
         id: '',
         inmobiliaria: '',
         broker: '',
@@ -31,56 +30,19 @@ const CrearPropiedad = () => {
         },
         Caracteristicas: {
             vista: "",
-            distanciamarmetros: "",
+            tipocasa: "",
+            orientacion: "",
+            disposicion: "",
             frentealmar: "",
-            tenencia: "",
-            monedacontribucion: "",
-            contribucioninmobiliaria: "",
-            monedaprimaria: "",
-            impuestoprimaria: "",
-            youtube: "",
-            matterport: "",
-
-            // Terreno específico
-            superficie: "",
+            distanciamarmetros: "",
+            superficieterreno: "",
+            superficieedificado: "",
+            superficiecubierta: "",
+            superficiesemicubierta: "",
             frente: "",
             fondo: "",
-            lateral: "",
-            esquina: "",
-            arbolado: "",
-            divisible: "",
-            sobreruta: "",
-            luz: "",
-            agua: "",
-            saneamiento: "",
-            formaterreno: "",
-            accesocampo: "",
-            fot: "",
-            subzona: "",
-            aptoph: "",
-            supeficieedificable: "",
-            cantidadpisos: "",
-            alambrado: "",
-            alto: "",            
-
-
-            // Apartamento específico
-            parrillero: "",
-            playroom: "",
-            mucamas: "",
-            servicioplaya: "",
-            tipoedificio: "",
-            asensores: "",
-            piscina: "",
-            estacionamientovisitas: "",
-            sauna: "",
-            gimnasio: "",
-            canchas: "",
-            vigilancia: "",
-            numeropiso: "",
-            aptosxpiso: "",
+            tenencia: "",
             totaldormitorios: "",
-            mediodormitorio: "",
             banos: "",
             suites: "",
             toilettes: "",
@@ -88,88 +50,46 @@ const CrearPropiedad = () => {
             living: "",
             comedor: "",
             livingcomedor: "",
+            comedordiario: "",
             capacidadpersonas: "",
             cantidadcamas: "",
-            caracteristicas: "",
-            equipamiento: "",
-            comodidades: "",
-            amenities: "",
-            frecuenciacontribucion: "",
-            frecuenciaprimaria: "",
-            gastoscomunes: "",
-            monedagastos: "",
-            frecuenciagastos: "",
-            antiguedad: "",
             dependenciaservicio: "",
+            equipamiento: "",
+            caracteristicas: "",
+            comodidades: "",
             banoservicio: "",
+            playroom: "",
+            propiedadhorizonal: "",
             estufalena: "",
             cochera: "",
+            calefaccion: "",
             garage: "",
             estacionamiento: "",
             estado: "",
-            calefaccion: "",
-            superficietotal: "",
-            superficiepropia: "",
-            superficiecubierta: "",
-            superficiesemicubierta: "",
-            superficiebalcon: "",
-            baulera: "",
-            lavadero: "",
-            EsPH: "",
-            muebles: "",
-            amoblado: "",
-            amovred: "",
-            terrazabalcon: "",
-            comedordiario: "",
-            orientacion: "",
-            disposicion: "",
-            idedificio: "",
-            fondoreserva: "",
-            monedafondo: "",
-            vigenciafondo: "",
-
-            // Casa específico
-            tipocasa: "",
-            superficieterreno: "",
-            superficieedificado: "",
             cantidadplantas: "",
             paredes: "",
             pisos: "",
             techo: "",
+            saneamiento: "",
+            piscina: "",
+            parrillero: "",
             fechaconstruccion: "",
+            muebles: "",
+            amoblado: "",
+            amovred: "",
+            lavadero: "",
+            monedacontribucion: "",
+            contribucioninmobiliaria: "",
+            frecuenciacontribucion: "",
+            monedaprimaria: "",
+            impuestoprimaria: "",
+            frecuenciaprimaria: "",
+            gastoscomunes: "",
+            monedagastos: "",
+            frecuenciagastos: "",
             alarma: "",
-
-            // Chacra específico
-            zonas: "",
-            forestacion: "",
-            aguadas: "",
-            instalaciones: "",
-            galpones: "",
-            casapersonal: "",
-            cursoagua: "",
-            tajamar: "",
-            riego: "",
-            invernaculos: "",
-            alambrados: "",
-            canada: "",
-            arroyo: "",
-            costario: "",
-            pozoagua: "",
-            monte: "",
-            embarcadero: "",
-            potreros: "",
-            camaras: "",
-            preciohectareas: "",
-            enventa: "",
-            enalquiler: "",
-
-            // Local específico
-            fechamodificado: "",
-            metrosentrepiso: "",
-            metrossubsuelo: "",
-            ubicacion: "",
-            idealpara: "",
-            tipo: "",
+            youtube: "",
+            matterport: ""
         },
         venta: {
             precio: '',
@@ -243,7 +163,6 @@ const CrearPropiedad = () => {
 
     return (
         <>
-            <UserNavBar />
             <form className="crear-propiedad" onSubmit={handleSubmit}>
                 <h2>Información General</h2>
                 <input type="text" name="tipo" placeholder="Tipo" value={propiedad.tipo} onChange={handleChange} />
@@ -330,4 +249,4 @@ const CrearPropiedad = () => {
     );
 };
 
-export default CrearPropiedad;
+export default PublicarCasa;

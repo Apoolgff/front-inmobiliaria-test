@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../Navbar';
 import './Login.css';
 import { useAuth } from '../../services/authContext';  // Importa el contexto de autenticación
 
@@ -20,12 +21,11 @@ const Login = () => {
                 `${import.meta.env.VITE_BACKEND_URL}/usuarios/login`,
                 { email, password },
                 { withCredentials: true }
-                
             );
 
             if (response.status === 200) {
                 setIsAuthenticated(true);  // Actualiza el estado de autenticación
-                navigate('/dashboard');  // Redirige al Dashboard
+                window.location.replace('/dashboard');  // Redirige y recarga la página
             }
         } catch (err) {
             console.error('Error al iniciar sesión:', err);
@@ -34,30 +34,33 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin} className="login-form">
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                {error && <p className="error-message">{error}</p>}
-                <button type="submit">Iniciar Sesión</button>
-                <p>¿No tienes una cuenta?
-                    <Link to="/registro" className="registro-link"> Regístrate aquí</Link>
-                </p>
-            </form>
-        </div>
+        <>
+            <Navbar />
+            <div className="login-container">
+                <h2>Login</h2>
+                <form onSubmit={handleLogin} className="login-form">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    {error && <p className="error-message">{error}</p>}
+                    <button type="submit">Iniciar Sesión</button>
+                    <p>¿No tienes una cuenta?
+                        <Link to="/registro" className="registro-link"> Regístrate aquí</Link>
+                    </p>
+                </form>
+            </div>
+        </>
     );
 };
 

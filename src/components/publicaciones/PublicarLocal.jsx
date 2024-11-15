@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './CrearPropiedad.css';
-import UserNavBar from '../usuarios/UserNavbar';
+import '../propiedades/CrearPropiedad.css';
 import { useAuth } from '../../services/authContext';
 
-const CrearPropiedad = () => {
+const PublicarLocal = () => {
     const { userData } = useAuth();
     const [propiedad, setPropiedad] = useState({
         propietario: '',
         propietarioTipo: 'Usuarios',
-        tipo: '',
+        tipo: 'Local',
         id: '',
         inmobiliaria: '',
         broker: '',
@@ -30,146 +29,31 @@ const CrearPropiedad = () => {
             lon: ''
         },
         Caracteristicas: {
+            fechamodificado: "",
             vista: "",
             distanciamarmetros: "",
             frentealmar: "",
+            superficie: "",
+            superficiecubierta: "",
+            superficiesemicubierta: "",
+            frente: "",
+            fondo: "",
+            metrosentrepiso: "",
+            metrossubsuelo: "",
+            banos: "",
+            ubicacion: "",
+            idealpara: "",
             tenencia: "",
             monedacontribucion: "",
             contribucioninmobiliaria: "",
             monedaprimaria: "",
             impuestoprimaria: "",
-            youtube: "",
-            matterport: "",
-
-            // Terreno específico
-            superficie: "",
-            frente: "",
-            fondo: "",
-            lateral: "",
-            esquina: "",
-            arbolado: "",
-            divisible: "",
-            sobreruta: "",
-            luz: "",
-            agua: "",
-            saneamiento: "",
-            formaterreno: "",
-            accesocampo: "",
-            fot: "",
-            subzona: "",
-            aptoph: "",
-            supeficieedificable: "",
-            cantidadpisos: "",
-            alambrado: "",
-            alto: "",            
-
-
-            // Apartamento específico
-            parrillero: "",
-            playroom: "",
-            mucamas: "",
-            servicioplaya: "",
-            tipoedificio: "",
-            asensores: "",
-            piscina: "",
-            estacionamientovisitas: "",
-            sauna: "",
-            gimnasio: "",
-            canchas: "",
-            vigilancia: "",
-            numeropiso: "",
-            aptosxpiso: "",
-            totaldormitorios: "",
-            mediodormitorio: "",
-            banos: "",
-            suites: "",
-            toilettes: "",
-            cocina: "",
-            living: "",
-            comedor: "",
-            livingcomedor: "",
-            capacidadpersonas: "",
-            cantidadcamas: "",
-            caracteristicas: "",
-            equipamiento: "",
-            comodidades: "",
-            amenities: "",
-            frecuenciacontribucion: "",
-            frecuenciaprimaria: "",
             gastoscomunes: "",
             monedagastos: "",
             frecuenciagastos: "",
-            antiguedad: "",
-            dependenciaservicio: "",
-            banoservicio: "",
-            estufalena: "",
-            cochera: "",
-            garage: "",
-            estacionamiento: "",
-            estado: "",
-            calefaccion: "",
-            superficietotal: "",
-            superficiepropia: "",
-            superficiecubierta: "",
-            superficiesemicubierta: "",
-            superficiebalcon: "",
-            baulera: "",
-            lavadero: "",
-            EsPH: "",
-            muebles: "",
-            amoblado: "",
-            amovred: "",
-            terrazabalcon: "",
-            comedordiario: "",
-            orientacion: "",
-            disposicion: "",
-            idedificio: "",
-            fondoreserva: "",
-            monedafondo: "",
-            vigenciafondo: "",
-
-            // Casa específico
-            tipocasa: "",
-            superficieterreno: "",
-            superficieedificado: "",
-            cantidadplantas: "",
-            paredes: "",
-            pisos: "",
-            techo: "",
-            fechaconstruccion: "",
-            alarma: "",
-
-            // Chacra específico
-            zonas: "",
-            forestacion: "",
-            aguadas: "",
-            instalaciones: "",
-            galpones: "",
-            casapersonal: "",
-            cursoagua: "",
-            tajamar: "",
-            riego: "",
-            invernaculos: "",
-            alambrados: "",
-            canada: "",
-            arroyo: "",
-            costario: "",
-            pozoagua: "",
-            monte: "",
-            embarcadero: "",
-            potreros: "",
-            camaras: "",
-            preciohectareas: "",
-            enventa: "",
-            enalquiler: "",
-
-            // Local específico
-            fechamodificado: "",
-            metrosentrepiso: "",
-            metrossubsuelo: "",
-            ubicacion: "",
-            idealpara: "",
             tipo: "",
+            youtube: "",
+            matterport: ""
         },
         venta: {
             precio: '',
@@ -243,7 +127,6 @@ const CrearPropiedad = () => {
 
     return (
         <>
-            <UserNavBar />
             <form className="crear-propiedad" onSubmit={handleSubmit}>
                 <h2>Información General</h2>
                 <input type="text" name="tipo" placeholder="Tipo" value={propiedad.tipo} onChange={handleChange} />
@@ -330,4 +213,4 @@ const CrearPropiedad = () => {
     );
 };
 
-export default CrearPropiedad;
+export default PublicarLocal;

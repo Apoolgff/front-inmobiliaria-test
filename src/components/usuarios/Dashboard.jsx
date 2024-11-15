@@ -1,29 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/components/Dashboard.js
+import React, { useEffect } from 'react';
+import { useAuth } from '../../services/authContext'; // Importa el hook useAuth
 import UserNavbar from './UserNavbar'; // Importa UserNavbar
 
 const Dashboard = () => {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const { userData, loading, error, setUserData } = useAuth(); // Accede al userData desde el contexto
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/usuarios/current`, {
-                    withCredentials: true,
-                });
-                setUserData(response.data);
-            } catch (err) {
-                setError('No estás autenticado. Redirigiendo al login...');
-                window.location.href = '/login';
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserData();
-    }, []);
+        // Esta lógica puede recargar la página si detecta que los datos de usuario no son los esperados
+        if (!loading && !userData) {
+            window.location.reload(); // Recarga la página si no hay datos de usuario
+        }
+    }, [loading, userData]); // Se ejecuta cuando cambia el loading o los datos del usuario
 
     if (loading) return <p>Cargando...</p>;
     if (error) return <p>{error}</p>;
@@ -31,9 +19,9 @@ const Dashboard = () => {
     return (
         <div className="dashboard-container">
             <UserNavbar /> {/* Incluye UserNavbar */}
-            <h2>Bienvenido, {userData.nombre}</h2>
-            <p><strong>Email:</strong> {userData.email}</p>
-            <p><strong>Teléfono:</strong> {userData.telefono}</p>
+            <h2>Bienvenido, {userData?.nombre}</h2>
+            <p><strong>Email:</strong> {userData?.email}</p>
+            <p><strong>Teléfono:</strong> {userData?.telefono}</p>
             {/* Resto de tu dashboard */}
         </div>
     );

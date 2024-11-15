@@ -46,5 +46,32 @@
     font-weight: bold;
   }
 
+  .no-propiedades {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.no-propiedades p {
+    font-size: 18px;
+    color: #555;
+}
+
+.no-propiedades button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.no-propiedades button a {
+    color: white;
+    text-decoration: none;
+}
+
+.no-propiedades button:hover {
+    background-color: #0056b3;
+}
+
   
   

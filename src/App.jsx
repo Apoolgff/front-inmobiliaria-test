@@ -6,10 +6,12 @@ import RegistroUsuario from './components/login/RegistroUsuario';
 import RegistroInmobiliaria from './components/login/RegistroInmobiliaria';
 import Dashboard from './components/usuarios/Dashboard';
 import CrearPropiedad from './components/propiedades/CrearPropiedad';
+import Publicar from './components/publicaciones/Publicar.jsx'
 import VerPropiedades from './components/propiedades/VerPropiedades';
 import VerPropiedad from './components/propiedades/VerPropiedad';
 import ModificarPropiedad from './components/propiedades/ModificarPropiedad'
 import CrearPublicacion from './components/publicaciones/CrearPublicacion'
+import VerPublicaciones from './components/publicaciones/VerPublicaciones.jsx'
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './services/authContext';  // Aquí importas el AuthProvider
 
@@ -24,6 +26,7 @@ function App() {
                         <Route path="/registro" element={<Registro />} />
                         <Route path="/registro/usuario" element={<RegistroUsuario />} />
                         <Route path="/registro/inmobiliaria" element={<RegistroInmobiliaria />} />
+                        <Route path="/ver-publicaciones" element={<VerPublicaciones />} />
 
                         {/* Rutas protegidas */}
                         <Route
@@ -35,10 +38,10 @@ function App() {
                             }
                         />
                         <Route
-                            path="/crear-propiedad"
+                            path="/publicar"
                             element={
                                 <ProtectedRoute>
-                                    <CrearPropiedad />
+                                    <Publicar />
                                 </ProtectedRoute>
                             }
                         />
