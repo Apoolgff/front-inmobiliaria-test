@@ -31,9 +31,6 @@ const UserNavbar = () => {
                     <Link to="/ver-propiedades">Ver Propiedades</Link>
                 </li>
                 <li>
-                    <Link to="/crear-publicacion">Publicar</Link>
-                </li>
-                <li>
                     <Link to="/ver-publicaciones">Ver Publicaciones</Link>
                 </li>
                 <li>

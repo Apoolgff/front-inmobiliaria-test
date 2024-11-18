@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './VerPublicaciones.css';
-import UserNavbar from '../usuarios/UserNavbar';
 import Navbar from '../Navbar';
+import UserNavbar from '../usuarios/UserNavbar';
 import { useAuth } from '../../services/authContext';
+import './VerPublicaciones.css';
+import { Link } from 'react-router-dom';
 
 const VerPublicaciones = () => {
   const { isAuthenticated } = useAuth(); // Obtenemos el estado de autenticación
@@ -15,7 +16,7 @@ const VerPublicaciones = () => {
     const fetchPublicaciones = async () => {
       try {
         const response = await axios.get('http://localhost:4000/publicacion');
-        setPublicaciones(response.data);
+        setPublicaciones(response.data); // Asumimos que el backend devuelve un arreglo de publicaciones
       } catch (err) {
         setError('Error al cargar las publicaciones');
       } finally {
@@ -32,23 +33,46 @@ const VerPublicaciones = () => {
     <div>
       {/* Navbar depende del estado de autenticación */}
       {isAuthenticated ? <UserNavbar /> : <Navbar />}
-      
+
       <div className="publicaciones-container">
-        {publicaciones.map((publicacion) => (
-          <div key={publicacion._id} className="publicacion-card">
-            <h3>{publicacion.tipo_publicacion.toUpperCase()}</h3>
-            <p><strong>Propiedad:</strong> {publicacion.propiedad?.titulo || 'N/A'}</p>
-            <p><strong>Usuario:</strong> {publicacion.usuario?.email || 'N/A'}</p>
-            <p><strong>Inmobiliaria:</strong> {publicacion.inmobiliaria?.nombre || 'N/A'}</p>
-            <p><strong>Tipo:</strong> {publicacion.tipo}</p>
-            <p><strong>Precio:</strong> 
-              {publicacion.tipo === 'venta' ? 
-                `$${publicacion.precio_venta}` : 
-                `$${publicacion.precio_alquiler?.valor} por ${publicacion.precio_alquiler?.periodo}`}
-            </p>
-            <p><strong>Visibilidad:</strong> {publicacion.visibilidad}</p>
-          </div>
-        ))}
+        {publicaciones.length > 0 ? (
+          publicaciones.map((publicacion) => (
+            <div className="publicacion-card" key={publicacion.id}>
+              <div className="publicacion-header">
+                <h3>{publicacion.titulo || 'Sin título'}</h3>
+              </div>
+              <div className="publicacion-body">
+                <p><strong>Descripción:</strong> {publicacion.descripcion || 'No disponible'}</p>
+                {publicacion.Ubicacion && (
+                  <p>
+                    <strong>Ubicación:</strong>
+                    {publicacion.Ubicacion.ciudad}, {publicacion.Ubicacion.departamento}
+                  </p>
+                )}
+                <p>
+                  <strong>En venta:</strong> {publicacion.enVenta ? 'Sí' : 'No'} <br />
+                  <strong>En alquiler:</strong> {publicacion.enAlquiler ? 'Sí' : 'No'}
+                </p>
+                {publicacion.Caracteristicas?.superficie && (
+                  <p><strong>Superficie:</strong> {publicacion.Caracteristicas.superficie} m²</p>
+                )}
+              </div>
+              {publicacion.fotos && publicacion.fotos.length > 0 && (
+                <div className="publicacion-fotos">
+                  <img
+                    src={publicacion.fotos[0].url}
+                    alt={publicacion.fotos[0].descripcion || 'Foto de la publicación'}
+                  />
+                </div>
+              )}
+              <Link to={`/publicacion/${publicacion._id}`}>
+                <button>Ver</button>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p>No se encontraron publicaciones.</p>
+        )}
       </div>
     </div>
   );

@@ -37,3 +37,49 @@
     margin-top: 30px;
   }
   
+  .crear-publicacion h2 {
+    cursor: pointer; /* Cambia el cursor a un puntero para indicar que es clickeable */
+    color: #007BFF; /* Color base para los títulos */
+    transition: color 0.3s ease; /* Transición suave para el hover */
+}
+
+.crear-publicacion h2:hover {
+    color: #0056b3; /* Color más oscuro al pasar el cursor */
+    text-decoration: underline; /* O cualquier otro estilo que quieras resaltar */
+}
+
+.radio-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.radio-buttons label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.radio-buttons input[type="radio"] {
+  margin: 0;
+}
+
+.crear-publicacion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.crear-publicacion input,
+.crear-publicacion textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.crear-publicacion button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

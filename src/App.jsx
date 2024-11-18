@@ -12,6 +12,7 @@ import VerPropiedad from './components/propiedades/VerPropiedad';
 import ModificarPropiedad from './components/propiedades/ModificarPropiedad'
 import CrearPublicacion from './components/publicaciones/CrearPublicacion'
 import VerPublicaciones from './components/publicaciones/VerPublicaciones.jsx'
+import VerPublicacion from './components/publicaciones/VerPublicacion.jsx'
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './services/authContext';  // Aquí importas el AuthProvider
 
@@ -27,7 +28,7 @@ function App() {
                         <Route path="/registro/usuario" element={<RegistroUsuario />} />
                         <Route path="/registro/inmobiliaria" element={<RegistroInmobiliaria />} />
                         <Route path="/ver-publicaciones" element={<VerPublicaciones />} />
-
+                        <Route path="/publicacion/:pid" element={<VerPublicacion />} />
                         {/* Rutas protegidas */}
                         <Route
                             path="/dashboard"

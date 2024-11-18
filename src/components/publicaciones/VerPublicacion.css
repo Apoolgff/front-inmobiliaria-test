@@ -1,0 +1,61 @@
+/* VerPublicacion.css */
+.ver-publicacion {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .ver-publicacion h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .contenido h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .ver-publicacion p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .ver-publicacion .metadata {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 10px;
+    text-align: right;
+  }
+  
+  .ver-publicacion .button-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .ver-publicacion button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ver-publicacion button:hover {
+    background-color: #0056b3;
+  }
+  
+  
