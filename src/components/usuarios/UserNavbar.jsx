@@ -10,7 +10,7 @@ const UserNavbar = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/usuarios/logout`, {}, { withCredentials: true });
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/cuentas/logout`, {}, { withCredentials: true });
             setIsAuthenticated(false);  // Actualiza el estado de autenticación
             window.location.replace('/login'); // Redirige al login y recarga la página
         } catch (err) {
@@ -26,9 +26,6 @@ const UserNavbar = () => {
                 </li>
                 <li>
                     <Link to="/publicar">Agregar Propiedad</Link>
-                </li>
-                <li>
-                    <Link to="/ver-propiedades">Ver Propiedades</Link>
                 </li>
                 <li>
                     <Link to="/ver-publicaciones">Ver Publicaciones</Link>

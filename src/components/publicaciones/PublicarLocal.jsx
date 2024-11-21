@@ -145,7 +145,7 @@ const PublicarLocal = () => {
         setSuccess('');
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publicacion/usuario/${userData._id}`, publicacion, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`, publicacion, {
                 withCredentials: true,
             });
             if (response.status === 201) {

@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
             if (window.location.pathname !== "/login" && window.location.pathname !== "/") {
                 try {
                     const response = await axios.get(
-                        `${import.meta.env.VITE_BACKEND_URL}/usuarios/current`,
+                        `${import.meta.env.VITE_BACKEND_URL}/cuentas/current`,
                         { withCredentials: true }
                     );
 

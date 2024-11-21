@@ -18,7 +18,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}/usuarios/login`,
+                `${import.meta.env.VITE_BACKEND_URL}/cuentas/login`,
                 { email, password },
                 { withCredentials: true }
             );

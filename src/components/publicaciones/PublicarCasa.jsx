@@ -8,7 +8,7 @@ const PublicarCasa = () => {
         propietario: '',
         propietarioTipo: 'Usuarios',
         tipo: 'Casa',
-        id: '',
+        id: null,
         inmobiliaria: null,
         broker: null,
         enVenta: false,  // Por defecto, no está en venta
@@ -182,7 +182,7 @@ const PublicarCasa = () => {
         setSuccess('');
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publicacion/usuario/${userData._id}`, publicacion, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`, publicacion, {
                 withCredentials: true,
             });
             if (response.status === 201) {

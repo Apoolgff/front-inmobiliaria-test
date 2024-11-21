@@ -23,7 +23,7 @@ const CrearPublicacion = () => {
 
             try {
                 const response = await axios.get(
-                    `${import.meta.env.VITE_BACKEND_URL}/propiedades/usuario/${userData._id}`,
+                    `${import.meta.env.VITE_BACKEND_URL}/propiedades/cuenta/${userData._id}`,
                     { withCredentials: true }
                 );
                 setPropiedades(response.data);
@@ -78,7 +78,7 @@ const CrearPublicacion = () => {
 
         try {
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}/publicacion/usuario/${userData._id}`,
+                `${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`,
                 publicacionData,
                 { withCredentials: true }
             );
