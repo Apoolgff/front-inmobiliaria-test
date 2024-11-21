@@ -41,12 +41,12 @@ const VerPublicaciones = () => {
       let filtered = [...publicaciones];
       const { tipo, venta, alquiler } = filters;
 
-      // Filtro por tipo de propiedad
+      //Filtro por tipo de propiedad
       if (Object.values(tipo).some((value) => value)) {
         filtered = filtered.filter((pub) => tipo[pub.tipo]);
       }
 
-      // Filtro por "En venta" o "En alquiler"
+      //Filtro por "En venta" o "En alquiler"
       if (venta && alquiler) {
         filtered = filtered.filter(
           (pub) => pub.enVenta || pub.enAlquiler
@@ -57,7 +57,7 @@ const VerPublicaciones = () => {
         filtered = filtered.filter((pub) => pub.enAlquiler);
       }
 
-      // Filtro por texto de búsqueda
+      //Filtro por texto de busqueda
       if (searchQuery.trim() !== '') {
         const lowerQuery = searchQuery.toLowerCase();
         filtered = filtered.filter((pub) =>
