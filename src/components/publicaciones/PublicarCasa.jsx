@@ -127,26 +127,39 @@ const PublicarCasa = () => {
             MarzoQuincena1: null,
             MarzoQuincena2: null,
             Temporada: null,
-            AceptaMascota: null,
-            AceptaFumador: null,
-            AceptaNinos: null,
-            GDeposito: null,
-            GPropiedad: null,
-            GAnda: null,
-            GPorto: null,
-            GCGN: null,
-            GMVOTMA: null,
-            GSura: null,
-            GLUC: null,
-            GCIncluidos: null
+            AceptaMascota: false,
+            AceptaFumador: false,
+            AceptaNinos: false,
+            GDeposito: false,
+            GPropiedad: false,
+            GAnda: false,
+            GPorto: false,
+            GCGN: false,
+            GMVOTMA: false,
+            GSura: false,
+            GLUC: false,
+            GCIncluidos: false
         },
-        fotos: []
+        fotos: [{url: null, descripcion: null}] // Cambiado a un arreglo de archivos
     });
 
     const [expandedSection, setExpandedSection] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+
+    const flattenObject = (obj, prefix = '') => {
+        return Object.keys(obj).reduce((acc, key) => {
+            const prefixedKey = prefix ? `${prefix}.${key}` : key;
+            if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+                Object.assign(acc, flattenObject(obj[key], prefixedKey));
+            } else {
+                acc[prefixedKey] = obj[key];
+            }
+            return acc;
+        }, {});
+    };
+    
 
     const toggleSection = (section) => {
         setExpandedSection((prev) => (prev === section ? '' : section));
@@ -164,36 +177,82 @@ const PublicarCasa = () => {
         }
     };
 
-    const handleFotoChange = (e, index) => {
-        const { name, value } = e.target;
-        const newFotos = [...publicacion.fotos];
-        newFotos[index] = { ...newFotos[index], [name]: value };
-        setPublicacion({ ...publicacion, fotos: newFotos });
+    const handleFotoChange = (e) => {
+        const files = e.target.files; // Obtener los archivos seleccionados
+        if (files && files.length > 0) {
+            const newFotos = Array.from(files).map((file) => ({
+                file, // Guardamos el archivo de la foto
+                descripcion: '' // Inicializamos una descripción vacía
+            }));
+            setPublicacion((prev) => ({
+                ...prev,
+                fotos: newFotos // Establecemos el nuevo estado con las fotos y descripciones vacías
+            }));
+        } else {
+            setPublicacion((prev) => ({
+                ...prev,
+                fotos: [] // Asegurarnos de que fotos esté vacío si no hay archivos
+            }));
+        }
     };
 
-    const addFoto = () => {
-        setPublicacion({ ...publicacion, fotos: [...publicacion.fotos, { url: '', descripcion: '' }] });
+    const handleDescripcionChange = (e, index) => {
+        const { value } = e.target;
+        setPublicacion((prev) => {
+            const updatedFotos = [...prev.fotos];
+            updatedFotos[index].descripcion = value; // Actualizamos la descripción de la foto en la posición correspondiente
+            return { ...prev, fotos: updatedFotos };
+        });
     };
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         setSuccess('');
-
+    
+        const formData = new FormData();
+    
+        // Aplanar datos de la publicación y agregarlos a FormData
+        const flattenedData = flattenObject(publicacion);
+        for (const [key, value] of Object.entries(flattenedData)) {
+            formData.append(key, value);
+        }
+    
+        // Agregar fotos al FormData
+        publicacion.fotos.forEach((foto, index) => {
+            if (foto.file) {
+                formData.append('fotos', foto.file); // Añadir archivo
+                if (foto.descripcion) {
+                    formData.append(`fotoDescripcion[${index}]`, foto.descripcion); // Descripción de la foto
+                }
+            }
+        });
+    
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`, publicacion, {
-                withCredentials: true,
-            });
+            const response = await axios.post(
+                `${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    withCredentials: true,
+                }
+            );
+    
             if (response.status === 201) {
-                setSuccess('Publicacion agregada con éxito');
+                setSuccess('Publicación agregada con éxito');
             }
         } catch (error) {
-            setError('Hubo un error al crear la publicacion. Intenta nuevamente.');
+            setError('Hubo un error al crear la publicación. Intenta nuevamente.');
         } finally {
             setLoading(false);
         }
     };
+    
 
     const handleRadioChange = (e) => {
         const { value } = e.target;
@@ -326,30 +385,27 @@ const PublicarCasa = () => {
                     <h2 onClick={() => toggleSection('fotos')}>Fotos</h2>
                     {expandedSection === 'fotos' && (
                         <>
+                            <input
+                                type="file"
+                                name="fotos"
+                                multiple
+                                onChange={handleFotoChange}
+                            />
                             {publicacion.fotos.map((foto, index) => (
                                 <div key={index}>
-                                    <input
-                                        type="text"
-                                        name="url"
-                                        placeholder="URL de la foto"
-                                        value={foto.url}
-                                        onChange={(e) => handleFotoChange(e, index)}
-                                    />
                                     <input
                                         type="text"
                                         name="descripcion"
                                         placeholder="Descripción de la foto"
                                         value={foto.descripcion}
-                                        onChange={(e) => handleFotoChange(e, index)}
+                                        onChange={(e) => handleDescripcionChange(e, index)}
                                     />
                                 </div>
                             ))}
-                            <button type="button" onClick={addFoto}>
-                                Añadir otra foto
-                            </button>
                         </>
                     )}
                 </div>
+
 
                 <button type="submit">Crear Publicacion</button>
             </form>
