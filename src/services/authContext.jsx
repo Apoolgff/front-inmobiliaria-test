@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const checkAuthStatus = async () => {
-            // Evitar validar en rutas de login o home
+
             if (window.location.pathname !== "/login" && window.location.pathname !== "/") {
                 try {
                     const response = await axios.get(
@@ -22,19 +22,19 @@ const AuthProvider = ({ children }) => {
                     );
 
                     setIsAuthenticated(true);
-                    setUserData(response.data); // Datos del usuario
+                    setUserData(response.data); 
                 } catch (err) {
                     console.error('Error al verificar token:', err);
-                    setIsAuthenticated(false); // Si falla la validación del token
-                    setUserData(null); // Limpiamos los datos si no está autenticado
-                    window.location.href = '/login'; // Redirige si no está autenticado
+                    setIsAuthenticated(false); 
+                    setUserData(null); 
+                    window.location.href = '/login'; 
                 }
             }
-            setLoading(false); // Aseguramos que siempre se termina el loading
+            setLoading(false); 
         };
 
-        checkAuthStatus(); // Verificar estado de autenticación al cargar el componente
-    }, []); // Solo se ejecuta una vez cuando el componente se monta
+        checkAuthStatus();
+    }, []); 
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, userData }}>
