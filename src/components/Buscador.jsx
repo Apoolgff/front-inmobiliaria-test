@@ -13,11 +13,13 @@ const Buscador = ({ onSearch }) => {
   return (
     <div className="buscador-container">
       <input
+        className="buscador-input"
         type="text"
         placeholder="Buscar publicaciones..."
         value={query}
         onChange={handleSearch}
       />
+      <button className="buscador-boton"><img src="/icons/search-icon.svg" alt="" /></button>
     </div>
   );
 };

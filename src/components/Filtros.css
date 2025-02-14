@@ -1,10 +1,8 @@
 .filtros-container {
     padding: 16px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
     max-width: 350px;
     margin: 16px auto;
+    
   }
   
   .filtros-container h3 {
@@ -18,16 +16,7 @@
     margin-bottom: 12px;
   }
   
-  label {
-    font-size: 1em;
-    color: #555;
-    margin-right: 8px;
-    display: inline-block;
-    cursor: pointer;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
+
   .filtro-item input[type="checkbox"] {
     margin-right: 6px;
   }

@@ -20,6 +20,10 @@ const UserNavbar = () => {
 
     return (
         <nav className="user-navbar">
+             <div className='home_logo'>
+                <img src="/icons/whale.png" alt="" />
+                <p className='home_logo-title'>Lotesde<span>mar</span></p>
+            </div>
             <ul>
                 <li>
                     <Link to="/dashboard">Inicio</Link>

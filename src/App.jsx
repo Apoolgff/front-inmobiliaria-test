@@ -15,16 +15,18 @@ import VerPublicaciones from './components/publicaciones/VerPublicaciones.jsx'
 import VerPublicacion from './components/publicaciones/VerPublicacion.jsx'
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './services/authContext';  // Aquí importas el AuthProvider
-
+import Home from './components/Home'
+import Catalog from './components/Catalog'
 function App() {
     return (
         <AuthProvider> {/* El AuthProvider envuelve toda la app */}
             <Router>
                 <div className="app-container">
                     <Routes>
-                        <Route path="/" element={<Login />} />
+                        <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/registro" element={<Registro />} />
+                        <Route path="/propiedades" element={<Catalog />} />
                         <Route path="/registro/usuario" element={<RegistroUsuario />} />
                         <Route path="/registro/inmobiliaria" element={<RegistroInmobiliaria />} />
                         <Route path="/ver-publicaciones" element={<VerPublicaciones />} />

@@ -1,5 +1,78 @@
 *{
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'khula-regular';
+}
+:root {
+  --primary-color: teal;
+  --secondary-color: #FF9900;
+  --underline-color: #c7def7;
+  --layer-color: rgba(18, 23, 49, 0.886);
+  --background-color: #F2F2F2;
+  --footer-color: #1d2738;
+  --border-color: #D7D7D7;
+
+}
+@font-face {
+  font-family: 'khula-bold';
+  src: url('/fonts/Khula-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'khula-semibold';
+  src: url('/fonts/Khula-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'khula-regular';
+  src: url('/fonts/Khula-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'khula-light';
+  src: url('/fonts/Khula-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'khula-extrabold';
+  src: url('../public/fonts/Khula-ExtraBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'boska-regular';
+  src: url('/fonts/Boska-Regular.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ibarra-nova-regular';
+  src: url('/fonts/IbarraRealNova-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'chillax-semibold';
+  src: url('/public/fonts/Chillax-Semibold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'chillax-bold';
+  src: url('/public/fonts/Chillax-Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+h1 {
+  font-family: 'khula-bold';
 }

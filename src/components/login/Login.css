@@ -9,9 +9,7 @@
     text-align: center;
 }
 
-h2 {
-    color: #333;
-}
+
 
 .login-form input {
     width: 100%;
@@ -39,9 +37,7 @@ h2 {
     background-color: #0056b3;
 }
 
-p {
-    margin-top: 15px;
-}
+
 
 .registro-link {
     color: #007bff;

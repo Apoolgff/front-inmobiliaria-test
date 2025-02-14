@@ -65,6 +65,7 @@ const VerPublicaciones = () => {
           pub.descripcion?.toLowerCase().includes(lowerQuery) ||
           pub.Ubicacion?.ciudad.toLowerCase().includes(lowerQuery) ||
           pub.Ubicacion?.departamento.toLowerCase().includes(lowerQuery)
+         
         );
       }
 
@@ -81,36 +82,24 @@ const VerPublicaciones = () => {
     <div>
       {isAuthenticated ? <UserNavbar /> : <Navbar />}
       <div className="ver-publicaciones-container">
-        <aside className="filtros-aside">
-          <Filtros onApplyFilters={setFilters} />
-        </aside>
+       
         <main className="publicaciones-main">
-          <Buscador onSearch={setSearchQuery} />
+          <div className="publicaciones-botones">
+            <Buscador onSearch={setSearchQuery} />
+            <button className="publicaciones-boton drop">Tipo de operacion</button>
+            <button className="publicaciones-boton drop">Tipo de propiedad</button>
+            <button className="publicaciones-boton drop">Caracteristicas</button>
+            <button className="publicaciones-boton">Precio</button>
+            <button className="publicaciones-boton">Ver mapa</button>
+            <button className="publicaciones-boton">Ordenar por</button>
+          </div>
+         
           <div className="publicaciones-container">
             {filteredPublicaciones.length > 0 ? (
               filteredPublicaciones.map((publicacion) => (
                 <div className="publicacion-card" key={publicacion.id}>
-                  <div className="publicacion-header">
-                    <h3>{publicacion.titulo || 'Sin título'}</h3>
-                  </div>
-                  <div className="publicacion-body">
-                    <p><strong>Tipo:</strong> {publicacion.tipo}</p>
-                    <p><strong>Descripción:</strong> {publicacion.descripcion || 'No disponible'}</p>
-                    {publicacion.Ubicacion && (
-                      <p>
-                        <strong>Ubicación:</strong>
-                        {publicacion.Ubicacion.ciudad}, {publicacion.Ubicacion.departamento}
-                      </p>
-                    )}
-                    <p>
-                      <strong>En venta:</strong> {publicacion.enVenta ? 'Sí' : 'No'} <br />
-                      <strong>En alquiler:</strong> {publicacion.enAlquiler ? 'Sí' : 'No'}
-                    </p>
-                    {publicacion.Caracteristicas?.superficie && (
-                      <p><strong>Superficie:</strong> {publicacion.Caracteristicas.superficie} m²</p>
-                    )}
-                  </div>
-                  {publicacion.fotos && publicacion.fotos.length > 0 && (
+                   <Link to={`/publicacion/${publicacion._id}`} className='publicacion-link'>
+                    {publicacion.fotos && publicacion.fotos.length > 0 && (
                     <div className="publicacion-fotos">
                       <img
                         src={publicacion.fotos[0].url}
@@ -118,8 +107,49 @@ const VerPublicaciones = () => {
                       />
                     </div>
                   )}
-                  <Link to={`/publicacion/${publicacion._id}`}>
-                    <button>Ver</button>
+                  <div className="publicacion-primera_linea">
+                   {publicacion.Ubicacion && (
+                      <p className="publicacion-locacion">
+                        {publicacion.Ubicacion.ciudad}, {publicacion.Ubicacion.departamento}
+                      </p>
+                    )}
+                      <p className="publicacion-tipo">{publicacion.tipo}</p>
+                  </div>
+                  <div className="publicacion-header">
+                    <p>{publicacion.titulo || 'Sin título'}</p>
+                    <p>
+                      {[
+                        publicacion.Caracteristicas.totaldormitorios > 0 &&
+                          (publicacion.Caracteristicas.totaldormitorios === 1 
+                            ? "Monoambiente" 
+                            : `${publicacion.Caracteristicas.totaldormitorios} dormitorios`),
+                        publicacion.Caracteristicas.banos > 0 &&
+                          (publicacion.Caracteristicas.banos === 1 
+                            ? `${publicacion.Caracteristicas.banos} baño` 
+                            : `${publicacion.Caracteristicas.banos} baños`),
+                        publicacion.Caracteristicas?.superficie &&
+                          `${publicacion.Caracteristicas.superficie} m²`
+                      ].filter(Boolean).join(" • ")}
+                    </p>
+                  </div>
+
+                  <div className="publicacion-body">
+                 
+                   
+                   
+                     <div className='publicacion-precio_venta'> 
+                      {publicacion.enVenta && publicacion.venta?.precio && (
+                        <p className='publicacion-precio'>${publicacion.venta.precio.toLocaleString()}</p>
+                      )}
+                      {publicacion.enAlquiler && publicacion.alquiler?.PrecioPubliacionAlquiler && (
+                        <p className='publicacion-precio'> ${publicacion.alquiler.PrecioPubliacionAlquiler.toLocaleString()}</p>
+                      )}
+                        <p className="publicacion-venta_alquiler">
+                      {publicacion.enAlquiler ? 'Alquiler' : 'Venta'} 
+                    </p>
+                    </div>  
+                 
+                  </div>
                   </Link>
                 </div>
               ))
@@ -127,6 +157,7 @@ const VerPublicaciones = () => {
               <p>No se encontraron publicaciones.</p>
             )}
           </div>
+          
         </main>
       </div>
     </div>

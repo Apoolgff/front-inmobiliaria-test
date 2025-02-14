@@ -1,0 +1,109 @@
+.home_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 3rem;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(161,161,161,1);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(161,161,161,1);
+    box-shadow: 0px 1px 5px 0px rgba(161,161,161,1);
+}
+.home_logo{
+    height: 74px;
+    font-size: 2rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   
+}
+.home_logo-title{
+   margin-top: 7px;
+   font-family: 'chillax-semibold' ;
+}
+.home_logo span{
+  color: var(--primary-color);
+  font-family: 'chillax-bold' ;
+}
+.home_logo img{
+ 
+  margin-right: 5px;
+ }
+.home_login{
+    
+    font-size: 16px;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   color: var(--primary-color);
+  
+}
+.home_login img{
+    height: 30px;
+    margin-left: 30px;
+}
+.home_login p{
+ margin-top: 7px;
+}
+.home_hero{
+   background: url('/public/images/hero-image.jpg');
+   background-size: cover;
+   background-position: center;
+   height: 75vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding-top: 10rem;
+   gap: 3rem;
+   
+}
+
+.home_hero-title{
+   font-size: 50px;
+   text-transform: uppercase;
+   font-family: 'boska-regular';
+   color: rgb(1, 54, 54);
+   letter-spacing: 4px;
+   filter: drop-shadow(2px 2px 2px #87878793);
+   
+ }
+
+ .home_filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1.2rem 2rem 2rem;
+    gap: 1.2rem;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(161,161,161,1);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(161,161,161,1);
+    box-shadow: 0px 1px 5px 0px rgba(161,161,161,1);
+ }
+ .home_filters-title {
+    font-size: 16px;
+    text-transform: uppercase;
+ }
+
+ .home_filters_article {
+    display: flex;
+    width: 100%;
+    justify-content:space-around;
+    
+ }
+ .home_filters_article-links {
+   display: flex;
+   gap: 4px;
+  text-decoration: none;
+  color: black;
+  border-radius: 30px;
+  padding: 12px 20px 8px 20px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+  text-transform: capitalize;
+}
+.home_filters_article-links img{
+   height: 20px;
+ }
+

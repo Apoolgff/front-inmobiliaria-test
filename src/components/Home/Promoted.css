@@ -1,0 +1,49 @@
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    
+    
+    /* Center slide text vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home_promoted {
+   padding: 5rem 0;
+  }
+  .home_promoted-slider {
+    height: 50vh;
+  }
+  .home_promoted-title {
+    text-transform: uppercase;
+    margin-left: 5rem;
+  }
+  .home_promoted-text {
+    text-transform: uppercase;
+    margin-left: 5rem;
+  }
+.promoted_card {
+  text-align: left;
+}
+.promoted_card_image{
+  border-radius: 20px;
+  overflow: hidden;
+  height: 258px;
+  margin-bottom: 1rem;
+}
+
+.promoted_button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 3px 30px 1px;
+  border-radius: 20px;
+  text-decoration: none;
+}

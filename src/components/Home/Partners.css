@@ -1,0 +1,29 @@
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+   
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home_partners_slider {
+    
+    padding: 2rem 0;
+  }
+  .partners_card {
+    text-align: left;
+    
+  }
+
+  .partners_card_image {
+   
+    object-fit: cover;
+  }
