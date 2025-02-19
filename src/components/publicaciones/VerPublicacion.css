@@ -1,25 +1,82 @@
 /* VerPublicacion.css */
 .ver-publicacion {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    align-items:center;
+    justify-content:center;
   }
-  
-
-  
-  .ver-publicacion p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
+  .ver-article {
+    width: 800px;
   }
-  
+.ver-descripcion {
+  padding:3rem;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(215,215,215,1);
+-moz-box-shadow: 0px 0px 5px 2px rgba(215,215,215,1);
+box-shadow: 0px 0px 5px 2px rgba(215,215,215,1);
 
+}
+.ver-encabezado {
+  display: flex;
+  width:100%;
+  justify-content: space-between;
+  
+}
+.ver-titulo {
+  color: teal;
+  text-transform: uppercase;
+}
 
- 
+.ver-ubicacion {
+  color:#6B6B6B;
+}
   
+ .ver-swiper {
+  width: 800px;
+  height: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+ }
+.ver-detalles {
+  background-color: teal;
+  color: white;
+  padding: 1rem;
+
+}
+
+.ver-descripcion_titulo {
+  color: teal;
+  margin: 2rem 0 2px 0;
+  text-transform: uppercase;
+}
+.ver-descripcion_linea {
+  background-color: teal;
+  width: 160px;
+  height: 2px;
+  margin-bottom: 3rem;
+}
+
+ .ver-caracteristicas {
+  background: #F2F2F2;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 5px;
+ }
+
+ .ver-imagenes {
+  width: 40px;
+  height: 40px;
+ }
   
+ .ver-caracteristicas_item {
+  background-color: white; 
+  padding: 15px 0;
+  text-align: center;
+}
+
+.ver-caracteristicas_texto {
+  font-size: 13px;
+  color: #6B6B6B;
+}

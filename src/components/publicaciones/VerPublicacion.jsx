@@ -5,6 +5,11 @@ import './VerPublicacion.css';
 import Navbar from '../Navbar';
 import UserNavbar from '../usuarios/UserNavbar';  // Importar UserNavbar
 import { useAuth } from '../../services/authContext';  // Importar el hook useAuth
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const VerPublicacion = () => {
     const { pid } = useParams(); // Obtiene el parámetro de la URL
@@ -37,37 +42,62 @@ const VerPublicacion = () => {
             {/* Muestra el Navbar dependiendo de la autenticación */}
             {isAuthenticated ? <UserNavbar /> : <Navbar />}
 
-            <div className="ver-publicacion">
-                <h2>{publicacion.titulo}</h2>
-                <div className="metadata">
-                    <p><strong>Categoría: </strong>{publicacion.tipo}</p>
+            <section className="ver-publicacion">
+                <article className='ver-article'>
+                
+                <div className='ver-swiper'>
+                <Swiper 
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    navigation
+                    pagination={{ clickable: true }}
+                    
+                >
+                    {(publicacion.fotos?.length > 0 ? publicacion.fotos : [{ url: "/public/images/casa-1.png" }]).map((foto, index) => (
+                        <SwiperSlide key={index}>
+                            <img src={foto.url} alt={`Imagen ${index + 1}`} className="slider-image" />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
                 </div>
-                <div className="propietario-container">
-                    <p><strong>Propietario: </strong>{publicacion.propietario.nombre}</p>
-                    <p><strong>Telefono: </strong>{publicacion.propietario.telefono}</p>
-                    <p><strong>Email: </strong>{publicacion.propietario.email}</p>
+                <div className='ver-descripcion'>
+                    <div className = "ver-encabezado">
+                        <h2 className='ver-titulo'>{publicacion.titulo}</h2>
+                        <p  >${publicacion.precio || 0} </p>
+                    </div>
+                    <p className='ver-ubicacion'>{publicacion.Ubicacion.departamento}, {publicacion.Ubicacion.ciudad}, {publicacion.Ubicacion.barrio}</p>
+                    <div className='ver-detalles'>
+                        <p>{publicacion.tipo} en {publicacion.Caracteristicas.estado}. Fecha de construccion {publicacion.Caracteristicas.fechaconstruccion}</p>
+                        <p>{publicacion.Caracteristicas.disposicion}, 
+                            {publicacion.Caracteristicas.plantas} plantas, {publicacion.Caracteristicas.totaldormitorios} dormitorios, {publicacion.Caracteristicas.banos} baños
+                        </p>
+                        <p>
+                            {publicacion.Caracteristicas.superficieedificado}m2 edificados, {publicacion.Caracteristicas.superficiecubierta}m2 del terreno
+                        </p>
+                    </div>
+                    <h3 className='ver-descripcion_titulo' >Descripcion</h3>
+                    <div className='ver-descripcion_linea'></div>
+                    <p>{publicacion.descripcion}</p>
                 </div>
-                <p>{publicacion.descripcion}</p>
-                <div className="contenido">
-                    <h3>Ubicacion:</h3>
-                    <p><strong>Departamento: </strong>{publicacion.Ubicacion.departamento}</p>
-                    <p><strong>Ciudad: </strong>{publicacion.Ubicacion.ciudad}</p>
-                    <p><strong>Frente al mar: </strong>{publicacion.Ubicacion.frentealmar}</p>
-                </div>
-                <div className="caracteristicas">
-                    <h3>Características:</h3>
+                <div className="ver-caracteristicas">
+                    
                     {publicacion.Caracteristicas && Object.entries(publicacion.Caracteristicas)
                         .filter(([key, value]) =>
                             key !== '_id' && value !== null && value !== undefined && value !== ''
                         )
                         .map(([key, value]) => (
-                            <p key={key}>
-                                <strong>{key}: </strong>{value.toString()}
+                            <div className='ver-caracteristicas_item' key={key}>
+                                <img className='ver-imagenes' src={`/icons/${key}.png`} alt="" />
+                            <p className='ver-caracteristicas_texto'>
+                                {key}: {value.toString()}
                             </p>
+                            </div>
                         ))
                     }
                 </div>
-            </div>
+                </article>
+            </section>
         </>
     );
 };
