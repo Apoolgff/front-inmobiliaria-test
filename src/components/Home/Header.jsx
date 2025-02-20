@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import axios from 'axios';
 import './Header.css';
-import SearchBar from '../utils/SearchBar';
-import LoginModal from '../login/LoginModal'; // Importa el modal
-import { useAuth } from '../../services/authContext'; // Importa el contexto de autenticación
+import { useAuth } from '../../services/authContext';
+import Buscador from '../utils/SearchBar'
+Modal.setAppElement('#root');
 
 const Header = () => {
-    const { isAuthenticated } = useAuth(); // Verifica si el usuario está autenticado
     const [showModal, setShowModal] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const { setIsAuthenticated } = useAuth();
 
-    const handleLoginClick = () => {
-        setShowModal(true);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError(null);
+
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_BACKEND_URL}/cuentas/login`,
+                { email, password },
+                { withCredentials: true }
+            );
+
+            if (response.status === 200) {
+                setIsAuthenticated(true);
+                setShowModal(false);
+                window.location.replace('/dashboard');
+            }
+        } catch (err) {
+            console.error('Error al iniciar sesión:', err);
+            setError(err.response?.data?.message || 'Error al iniciar sesión');
+        }
     };
 
     return (
@@ -22,13 +45,13 @@ const Header = () => {
                 </div>
                 <div className='home_login'>
                     <p>Publica una propiedad</p>
-                    <img className='home_logo-login' src="/icons/user.png" alt="" onClick={handleLoginClick} />
+                    <img className='home_logo-login' src="/icons/user.png" alt="" onClick={() => setShowModal(true)} />
                 </div>
             </header>
 
             <section className='home_hero'>
-                <h1 className='home_hero-title'>vivir y vacacionar junto al mar</h1>
-                <SearchBar />
+                <h1 className='home_hero-title'>Tu proxima propiedad cerca del mar esta aqui</h1>
+                <Buscador />
             </section>
 
             <section className='home_filters'>
@@ -61,14 +84,43 @@ const Header = () => {
                 </article>
             </section>
 
-            {/* Renderiza el modal solo si showModal es true */}
-            {showModal && (
-                <div className="modal-overlay" onClick={() => setShowModal(false)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <LoginModal onClose={() => setShowModal(false)} />
-                    </div>
+            <Modal 
+                isOpen={showModal} 
+                onRequestClose={() => setShowModal(false)}
+                contentLabel="Login Modal"
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <div className="login_modal-container">
+                <div className='home_logo'>
+                    <img src="/icons/whale.png" alt="" />
+                    <p className='home_logo-title'>Lotesde<span>mar</span></p>
                 </div>
-            )}
+                <p>Inicia Sesion</p>
+                <p className="login_modal-pregunta">¿Necesitas una cuenta en AIHAUS? </p> 
+                <Link to="/registro" className="registro_modal-link">Crea una cuenta</Link>
+                    <form onSubmit={handleLogin} className="login_modal-form">
+                       
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        {error && <p className="error-message">{error}</p>}
+                        <button type="submit">Iniciar Sesión</button>
+                        <p>¿Olvidaste la contraseña?</p>
+                    </form>
+                </div>
+            </Modal>
         </>
     );
 };

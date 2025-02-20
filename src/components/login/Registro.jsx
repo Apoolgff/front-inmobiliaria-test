@@ -77,6 +77,11 @@ const Registro = () => {
     return (
         <>
             <Navbar />
+            <section className='registro_hero'>
+                <div className='registro_hero-layer'>
+                    <h1 className='registro_hero-titulo' >Publicá en el Portal Inmobiliario No.1 </h1>
+                </div>
+            </section>
             <div className="registro-container">
                 <h2>Registro</h2>
                 <div className="tipo-selector">

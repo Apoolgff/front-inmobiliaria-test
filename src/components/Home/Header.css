@@ -20,13 +20,14 @@
 .home_logo-title{
    margin-top: 7px;
    font-family: 'chillax-semibold' ;
+   
 }
 .home_logo span{
   color: var(--primary-color);
   font-family: 'chillax-bold' ;
 }
-.home_logo img{
- 
+.home_logo-login{
+   cursor: pointer;
   margin-right: 5px;
  }
 .home_login{
@@ -107,3 +108,97 @@
    height: 20px;
  }
 
+/* Oscurece el fondo cuando el modal está abierto */
+.modal-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 1000;
+}
+
+/* Contenedor del modal */
+.modal-content {
+   background: white;
+   padding: 2rem;
+   border-radius: 8px;
+   width: 400px;
+   max-width: 90%;
+   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+   position: relative;
+}
+
+/* Botón de cerrar */
+.modal-close {
+   position: absolute;
+   top: 10px;
+   right: 15px;
+   background: none;
+   border: none;
+   font-size: 1.5rem;
+   cursor: pointer;
+   color: #555;
+}
+
+
+/* Login.css */
+.login_modal-container {
+   max-width: 400px;
+   margin: 20px auto;
+   padding: 20px;
+  
+   border-radius: 8px;
+   background-color: #f9f9f9;
+   text-align: center;
+}
+
+.login_modal-pregunta {
+   color: #6B6B6B;
+}
+.login_modal-form  {
+  margin-top: 1rem;
+}
+
+
+.login_modal-form input {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   border: 1px solid #ccc;
+   border-radius: 50px;
+}
+
+.login_modal-form button {
+   width: 100%;
+   padding: 10px;
+   margin: 30px 0 10px;
+   background-color: teal;
+   color: #fff;
+   font-size: 16px;
+   font-weight: bold;
+   border: none;
+   cursor: pointer;
+   border-radius: 50px;
+   transition: background-color 0.3s ease;
+}
+
+.login_modal-form button:hover {
+   background-color: #0056b3;
+}
+
+
+
+.registro_modal-link {
+   color: teal;
+   
+  
+}
+
+.registro_modal-link:hover {
+   text-decoration: underline;
+}
