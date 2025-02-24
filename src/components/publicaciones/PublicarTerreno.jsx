@@ -1,120 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Importar useEffect
 import axios from 'axios';
 import { useAuth } from '../../services/authContext';
+import { estadoInicialTerreno } from './constants/EstadosIniciales'; // Importar el estado inicial
 
 const PublicarTerreno = () => {
     const { userData } = useAuth();
-    const [publicacion, setPublicacion] = useState({
-        propietario: '',
-        propietarioTipo: 'Usuarios',
-        tipo: 'Terreno',
-        id: '',
-        inmobiliaria: '',
-        broker: '',
-        enVenta: false,
-        enAlquiler: false,
-        titulo: '',
-        descripcion: '',
-        destacada: false,
-        url: '',
-        Ubicacion: {
-            departamento: '',
-            ciudad: '',
-            barrio: '',
-            distanciamarmetros: '',
-            frentealmar: '',
-            direccion: '',
-            lat: '',
-            lon: ''
-        },
-        Caracteristicas: {
-            vista: "",
-            distanciamarmetros: "",
-            frentealmar: "",
-            superficie: "",
-            frente: "",
-            fondo: "",
-            lateral: "",
-            esquina: "",
-            arbolado: "",
-            divisible: "",
-            sobreruta: "",
-            luz: "",
-            agua: "",
-            saneamiento: "",
-            formaterreno: "",
-            accesocampo: "",
-            fot: "",
-            subzona: "",
-            aptoph: "",
-            supeficieedificable: "",
-            cantidadpisos: "",
-            alambrado: "",
-            alto: "",
-            monedacontribucion: "",
-            contribucioninmobiliaria: "",
-            monedaprimaria: "",
-            impuestoprimaria: "",
-            tenencia: "",
-            youtube: "",
-            matterport: ""
-        },
-        venta: {
-            precio: '',
-            mda: '',
-            fechavigencia: '',
-            permuta: '',
-            oferta: '',
-            financia: '',
-            renta: '',
-            porcentajerenta: '',
-            saldobanco: ''
-        },
-        alquiler: {
-            VigenciaAlquiler: "",
-            PrecioPubliacionAlquiler: "",
-            Enero: "",
-            EneroQuincena1: "",
-            EneroQuincena2: "",
-            Febrero: "",
-            FebreroQuincena1: "",
-            FebreroQuincena2: "",
-            Reveion: "",
-            Carnaval: "",
-            SemanaSanta: "",
-            AnualPesos: "",
-            InvernalPesos: "",
-            AnualDolares: "",
-            PeriodoPrecioAlqAnual: "",
-            AnualTestigo: "", // o string o number
-            CotizacionDolar: "",
-            InvernalDolares: "",
-            Diciembre: "",
-            DiciembreQuincena1: "",
-            DiciembreQuincena2: "",
-            Marzo: "",
-            MarzoQuincena1: "",
-            MarzoQuincena2: "",
-            Temporada: "",
-            AceptaMascota: "",
-            AceptaFumador: "",
-            AceptaNinos: "",
-            GDeposito: "",
-            GPropiedad: "",
-            GAnda: "",
-            GPorto: "",
-            GCGN: "",
-            GMVOTMA: "",
-            GSura: "",
-            GLUC: "",
-            GCIncluidos: ""
-        },
-        fotos: []
-    });
+    const [publicacion, setPublicacion] = useState(estadoInicialTerreno); // Usar el estado inicial
     const [expandedSection, setExpandedSection] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+
+    // Actualizar el estado inicial con el tipo de usuario
+    useEffect(() => {
+        if (userData?.tipo) {
+            setPublicacion((prev) => ({
+                ...prev,
+                propietarioTipo: userData.tipo, // Asignar el tipo de usuario
+                propietario: userData._id, // Asignar el ID del usuario como propietario
+            }));
+        }
+    }, [userData]); // Dependencia: userData
 
     const flattenObject = (obj, prefix = '') => {
         return Object.keys(obj).reduce((acc, key) => {
@@ -127,7 +33,6 @@ const PublicarTerreno = () => {
             return acc;
         }, {});
     };
-    
 
     const toggleSection = (section) => {
         setExpandedSection((prev) => (prev === section ? '' : section));
@@ -146,20 +51,20 @@ const PublicarTerreno = () => {
     };
 
     const handleFotoChange = (e) => {
-        const files = e.target.files; // Obtener los archivos seleccionados
+        const files = e.target.files;
         if (files && files.length > 0) {
             const newFotos = Array.from(files).map((file) => ({
-                file, // Guardamos el archivo de la foto
-                descripcion: '' // Inicializamos una descripción vacía
+                file,
+                descripcion: ''
             }));
             setPublicacion((prev) => ({
                 ...prev,
-                fotos: newFotos // Establecemos el nuevo estado con las fotos y descripciones vacías
+                fotos: newFotos
             }));
         } else {
             setPublicacion((prev) => ({
                 ...prev,
-                fotos: [] // Asegurarnos de que fotos esté vacío si no hay archivos
+                fotos: []
             }));
         }
     };
@@ -168,37 +73,32 @@ const PublicarTerreno = () => {
         const { value } = e.target;
         setPublicacion((prev) => {
             const updatedFotos = [...prev.fotos];
-            updatedFotos[index].descripcion = value; // Actualizamos la descripción de la foto en la posición correspondiente
+            updatedFotos[index].descripcion = value;
             return { ...prev, fotos: updatedFotos };
         });
     };
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         setSuccess('');
-    
+
         const formData = new FormData();
-    
-        // Aplanar datos de la publicación y agregarlos a FormData
         const flattenedData = flattenObject(publicacion);
         for (const [key, value] of Object.entries(flattenedData)) {
             formData.append(key, value);
         }
-    
-        // Agregar fotos al FormData
+
         publicacion.fotos.forEach((foto, index) => {
             if (foto.file) {
-                formData.append('fotos', foto.file); // Añadir archivo
+                formData.append('fotos', foto.file);
                 if (foto.descripcion) {
-                    formData.append(`fotoDescripcion[${index}]`, foto.descripcion); // Descripción de la foto
+                    formData.append(`fotoDescripcion[${index}]`, foto.descripcion);
                 }
             }
         });
-    
+
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`,
@@ -210,7 +110,7 @@ const PublicarTerreno = () => {
                     withCredentials: true,
                 }
             );
-    
+
             if (response.status === 201) {
                 setSuccess('Publicación agregada con éxito');
             }
@@ -220,7 +120,6 @@ const PublicarTerreno = () => {
             setLoading(false);
         }
     };
-    
 
     const handleRadioChange = (e) => {
         const { value } = e.target;
@@ -284,7 +183,6 @@ const PublicarTerreno = () => {
                         ))}
                 </div>
 
-                {/* Mostrar el título "Venta o Alquiler" y los radio buttons */}
                 <div>
                     <h2 onClick={() => toggleSection('venta-alquiler')}>Venta o Alquiler</h2>
                     {expandedSection === 'venta-alquiler' && (
@@ -313,7 +211,6 @@ const PublicarTerreno = () => {
                     )}
                 </div>
 
-                {/* Mostrar inputs de Venta si enVenta */}
                 {publicacion.enVenta && (
                     <div>
                         <h2 onClick={() => toggleSection('venta')}>Venta</h2>
@@ -331,7 +228,6 @@ const PublicarTerreno = () => {
                     </div>
                 )}
 
-                {/* Mostrar inputs de Alquiler si enAlquiler */}
                 {publicacion.enAlquiler && (
                     <div>
                         <h2 onClick={() => toggleSection('alquiler')}>Alquiler</h2>
@@ -373,7 +269,6 @@ const PublicarTerreno = () => {
                         </>
                     )}
                 </div>
-
 
                 <button type="submit">Crear Publicacion</button>
             </form>

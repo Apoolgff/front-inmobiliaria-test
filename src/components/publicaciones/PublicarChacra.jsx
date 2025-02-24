@@ -1,130 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Importar useEffect
 import axios from 'axios';
 import { useAuth } from '../../services/authContext';
+import { estadoInicialChacra } from './constants/EstadosIniciales'; // Importar el estado inicial
 
 const PublicarChacra = () => {
     const { userData } = useAuth();
-    const [publicacion, setPublicacion] = useState({
-        propietario: '',
-        propietarioTipo: 'Usuarios',
-        tipo: 'Chacra',
-        id: null,
-        inmobiliaria: null,
-        broker: null,
-        enVenta: false,
-        enAlquiler: false,
-        titulo: null,
-        descripcion: null,
-        destacada: false,
-        url: null,
-        Ubicacion: {
-            departamento: null,
-            ciudad: null,
-            barrio: null,
-            distanciamarmetros: null,
-            frentealmar: null,
-            direccion: null,
-            lat: null,
-            lon: null
-        },
-        Caracteristicas: {
-            vista: null,
-            distanciamarmetros: null,
-            frentealmar: null,
-            superficieterreno: null,
-            superficieterrenom2: null,
-            superficieedificado: null,
-            totaldormitorios: null,
-            banos: null,
-            suites: null,
-            cocina: null,
-            living: null,
-            comedor: null,
-            livingcomedor: null,
-            zonas: null,
-            forestacion: null,
-            aguadas: null,
-            instalaciones: null,
-            galpones: null,
-            casapersonal: null,
-            cursoagua: null,
-            tajamar: null,
-            riego: null,
-            invernaculos: null,
-            alambrados: null,
-            canada: null,
-            arroyo: null,
-            costario: null,
-            pozoagua: null,
-            monte: null,
-            embarcadero: null,
-            potreros: null,
-            camaras: null,
-            preciohectareas: null,
-            enventa: null,
-            enalquiler: null,
-            tenencia: null,
-            contribucioninmobiliaria: null,
-            impuestoprimaria: null,
-            youtube: null,
-            matterport: null
-        },
-        venta: {
-            precio: null,
-            mda: null,
-            fechavigencia: null,
-            permuta: null,
-            oferta: null,
-            financia: null,
-            renta: null,
-            porcentajerenta: null,
-            saldobanco: null
-        },
-        alquiler: {
-            VigenciaAlquiler: null,
-            PrecioPubliacionAlquiler: null,
-            Enero: null,
-            EneroQuincena1: null,
-            EneroQuincena2: null,
-            Febrero: null,
-            FebreroQuincena1: null,
-            FebreroQuincena2: null,
-            Reveion: null,
-            Carnaval: null,
-            SemanaSanta: null,
-            AnualPesos: null,
-            InvernalPesos: null,
-            AnualDolares: null,
-            PeriodoPrecioAlqAnual: null,
-            AnualTestigo: null, // o string o number
-            CotizacionDolar: null,
-            InvernalDolares: null,
-            Diciembre: null,
-            DiciembreQuincena1: null,
-            DiciembreQuincena2: null,
-            Marzo: null,
-            MarzoQuincena1: null,
-            MarzoQuincena2: null,
-            Temporada: null,
-            AceptaMascota: null,
-            AceptaFumador: null,
-            AceptaNinos: null,
-            GDeposito: null,
-            GPropiedad: null,
-            GAnda: null,
-            GPorto: null,
-            GCGN: null,
-            GMVOTMA: null,
-            GSura: null,
-            GLUC: null,
-            GCIncluidos: null
-        },
-        fotos: []
-    });
+    const [publicacion, setPublicacion] = useState(estadoInicialChacra); // Usar el estado inicial
     const [expandedSection, setExpandedSection] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+
+    // Actualizar el estado inicial con el tipo de usuario
+    useEffect(() => {
+        if (userData?.tipo) {
+            setPublicacion((prev) => ({
+                ...prev,
+                propietarioTipo: userData.tipo, // Asignar el tipo de usuario
+                propietario: userData._id, // Asignar el ID del usuario como propietario
+            }));
+        }
+    }, [userData]); // Dependencia: userData
 
     const flattenObject = (obj, prefix = '') => {
         return Object.keys(obj).reduce((acc, key) => {
@@ -137,7 +33,6 @@ const PublicarChacra = () => {
             return acc;
         }, {});
     };
-    
 
     const toggleSection = (section) => {
         setExpandedSection((prev) => (prev === section ? '' : section));
@@ -156,20 +51,20 @@ const PublicarChacra = () => {
     };
 
     const handleFotoChange = (e) => {
-        const files = e.target.files; // Obtener los archivos seleccionados
+        const files = e.target.files;
         if (files && files.length > 0) {
             const newFotos = Array.from(files).map((file) => ({
-                file, // Guardamos el archivo de la foto
-                descripcion: '' // Inicializamos una descripción vacía
+                file,
+                descripcion: ''
             }));
             setPublicacion((prev) => ({
                 ...prev,
-                fotos: newFotos // Establecemos el nuevo estado con las fotos y descripciones vacías
+                fotos: newFotos
             }));
         } else {
             setPublicacion((prev) => ({
                 ...prev,
-                fotos: [] // Asegurarnos de que fotos esté vacío si no hay archivos
+                fotos: []
             }));
         }
     };
@@ -178,37 +73,32 @@ const PublicarChacra = () => {
         const { value } = e.target;
         setPublicacion((prev) => {
             const updatedFotos = [...prev.fotos];
-            updatedFotos[index].descripcion = value; // Actualizamos la descripción de la foto en la posición correspondiente
+            updatedFotos[index].descripcion = value;
             return { ...prev, fotos: updatedFotos };
         });
     };
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         setSuccess('');
-    
+
         const formData = new FormData();
-    
-        // Aplanar datos de la publicación y agregarlos a FormData
         const flattenedData = flattenObject(publicacion);
         for (const [key, value] of Object.entries(flattenedData)) {
             formData.append(key, value);
         }
-    
-        // Agregar fotos al FormData
+
         publicacion.fotos.forEach((foto, index) => {
             if (foto.file) {
-                formData.append('fotos', foto.file); // Añadir archivo
+                formData.append('fotos', foto.file);
                 if (foto.descripcion) {
-                    formData.append(`fotoDescripcion[${index}]`, foto.descripcion); // Descripción de la foto
+                    formData.append(`fotoDescripcion[${index}]`, foto.descripcion);
                 }
             }
         });
-    
+
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/publicacion/cuenta/${userData._id}`,
@@ -220,7 +110,7 @@ const PublicarChacra = () => {
                     withCredentials: true,
                 }
             );
-    
+
             if (response.status === 201) {
                 setSuccess('Publicación agregada con éxito');
             }
@@ -230,7 +120,6 @@ const PublicarChacra = () => {
             setLoading(false);
         }
     };
-    
 
     const handleRadioChange = (e) => {
         const { value } = e.target;
@@ -294,7 +183,6 @@ const PublicarChacra = () => {
                         ))}
                 </div>
 
-                {/* Mostrar el título "Venta o Alquiler" y los radio buttons */}
                 <div>
                     <h2 onClick={() => toggleSection('venta-alquiler')}>Venta o Alquiler</h2>
                     {expandedSection === 'venta-alquiler' && (
@@ -323,7 +211,6 @@ const PublicarChacra = () => {
                     )}
                 </div>
 
-                {/* Mostrar inputs de Venta si enVenta */}
                 {publicacion.enVenta && (
                     <div>
                         <h2 onClick={() => toggleSection('venta')}>Venta</h2>
@@ -341,7 +228,6 @@ const PublicarChacra = () => {
                     </div>
                 )}
 
-                {/* Mostrar inputs de Alquiler si enAlquiler */}
                 {publicacion.enAlquiler && (
                     <div>
                         <h2 onClick={() => toggleSection('alquiler')}>Alquiler</h2>
@@ -383,7 +269,6 @@ const PublicarChacra = () => {
                         </>
                     )}
                 </div>
-
 
                 <button type="submit">Crear Publicacion</button>
             </form>

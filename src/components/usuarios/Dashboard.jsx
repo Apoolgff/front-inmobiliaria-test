@@ -22,6 +22,7 @@ const Dashboard = () => {
             <h2>Bienvenido, {userData?.nombre}</h2>
             <p><strong>Email:</strong> {userData?.email}</p>
             <p><strong>Teléfono:</strong> {userData?.telefono}</p>
+            <p><strong>Tipo:</strong> {userData?.tipo}</p>
             {/* Resto de tu dashboard */}
         </div>
     );
