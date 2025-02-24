@@ -165,7 +165,7 @@
 }
 
 
-.login_modal-form input {
+.login_modal-input {
    width: 100%;
    padding: 10px;
    margin: 10px 0;
@@ -173,7 +173,12 @@
    border-radius: 50px;
 }
 
-.login_modal-form button {
+.login_modal-input:focus {
+   border: 1px solid teal;
+   outline: none;
+}
+
+.login_modal-button {
    width: 100%;
    padding: 10px;
    margin: 30px 0 10px;
@@ -187,8 +192,8 @@
    transition: background-color 0.3s ease;
 }
 
-.login_modal-form button:hover {
-   background-color: #0056b3;
+.login_modal-button:hover {
+   background-color:rgb(23, 93, 104);
 }
 
 

@@ -97,18 +97,18 @@ const Header = () => {
                     <p className='home_logo-title'>Lotesde<span>mar</span></p>
                 </div>
                 <p>Inicia Sesion</p>
-                <p className="login_modal-pregunta">¿Necesitas una cuenta en AIHAUS? </p> 
+                <p className="login_modal-pregunta">¿Necesitas una cuenta en Lotes de Mar? </p> 
                 <Link to="/registro" className="registro_modal-link">Crea una cuenta</Link>
                     <form onSubmit={handleLogin} className="login_modal-form">
                        
-                        <input
+                        <input className='login_modal-input'
                             type="email"
                             placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        <input
+                        <input className='login_modal-input'
                             type="password"
                             placeholder="Password"
                             value={password}
@@ -116,7 +116,7 @@ const Header = () => {
                             required
                         />
                         {error && <p className="error-message">{error}</p>}
-                        <button type="submit">Iniciar Sesión</button>
+                        <button className='login_modal-button ' type="submit">Iniciar Sesión</button>
                         <p>¿Olvidaste la contraseña?</p>
                     </form>
                 </div>

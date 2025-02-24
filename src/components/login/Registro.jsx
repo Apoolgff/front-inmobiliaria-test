@@ -6,7 +6,7 @@ import Navbar from '../Navbar';
 import './Registro.css';
 
 const Registro = () => {
-    const [tipo, setTipo] = useState('');
+    const [tipo, setTipo] = useState('usuario');
     const [form, setForm] = useState({
         nombre: '',
         email: '',
@@ -80,81 +80,91 @@ const Registro = () => {
             <section className='registro_hero'>
                 <div className='registro_hero-layer'>
                     <h1 className='registro_hero-titulo' >Publicá en el Portal Inmobiliario No.1 </h1>
+                    <p className='registro_hero-subtitulo' >Más de 900 inmobiliarias y desarrolladoras ya confían en lotes de mar, vos también podés ser parte.</p>
+                    <button className='registro_hero-boton' >Publicar un propiedad</button>
                 </div>
             </section>
             <div className="registro-container">
-                <h2>Registro</h2>
+                <h2 className="registro-container-titulo">Registro</h2>
                 <div className="tipo-selector">
-                    <label>
-                        <input
-                            type="radio"
-                            value="usuario"
-                            checked={tipo === 'usuario'}
-                            onChange={(e) => setTipo(e.target.value)}
-                        />
-                        Usuario
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value="inmobiliaria"
-                            checked={tipo === 'inmobiliaria'}
-                            onChange={(e) => setTipo(e.target.value)}
-                        />
-                        Inmobiliaria
-                    </label>
+                    <input
+                        type="radio"
+                        id="usuario"
+                        value="usuario"
+                        checked={tipo === "usuario"}
+                        onChange={(e) => setTipo(e.target.value)}
+                    />
+                    <label htmlFor="usuario">Dueño vende</label>
+
+                    <input
+                        type="radio"
+                        id="inmobiliaria"
+                        value="inmobiliaria"
+                        checked={tipo === "inmobiliaria"}
+                        onChange={(e) => setTipo(e.target.value)}
+                    />
+                    <label htmlFor="inmobiliaria">Inmobiliaria</label>
                 </div>
+
                 {tipo && (
-                    <form onSubmit={handleSubmit}>
-                        <input name="nombre" type="text" placeholder="Nombre" value={form.nombre} onChange={handleChange} required />
-                        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-                        <input name="telefono" type="text" placeholder="Teléfono" value={form.telefono} onChange={handleChange} required />
-                        <input name="password" type="password" placeholder="Contraseña" value={form.password} onChange={handleChange} required />
-                        <input name="confirmPassword" type="password" placeholder="Confirmar Contraseña" value={form.confirmPassword} onChange={handleChange} required />
-
-                        {tipo === 'usuario' && (
-                            <>
-                                <input
-                                    name="usuario.apellido"
-                                    type="text"
-                                    placeholder="Apellido"
-                                    value={form.usuario.apellido}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </>
-                        )}
-
+                    <form  onSubmit={handleSubmit}>
+                        <div className= "registro-form-secciones">
+                        <div className= "registro-form-usuario">
+                            <input className = "registro-input" name="nombre" type="text" placeholder="Nombre" value={form.nombre} onChange={handleChange} required />
+                            <input className = "registro-input" name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+                            <input className = "registro-input" name="telefono" type="text" placeholder="Teléfono" value={form.telefono} onChange={handleChange} required />
+                            <input className = "registro-input" name="password" type="password" placeholder="Contraseña" value={form.password} onChange={handleChange} required />
+                            <input className = "registro-input" name="confirmPassword" type="password" placeholder="Confirmar Contraseña" value={form.confirmPassword} onChange={handleChange} required />
+                            </div>
+                            <div className= "registro-form-inmobiliaria">
+                            {tipo === 'usuario' && (
+                                <>
+                                    <input
+                                        className = "registro-input"
+                                        name="usuario.apellido"
+                                        type="text"
+                                        placeholder="Apellido"
+                                        value={form.usuario.apellido}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </>
+                            )}
+                        
+                       
                         {tipo === 'inmobiliaria' && (
-                            <>
+                            <div className={`inmobiliaria-fields ${tipo === 'inmobiliaria' ? 'visible' : ''}`}>
                                 <input
+                                    className = "registro-input"
                                     name="inmobiliaria.razon_social"
                                     type="text"
                                     placeholder="Razón Social"
                                     value={form.inmobiliaria.razon_social}
                                     onChange={handleChange}
-                                    required
                                 />
                                 <input
+                                    className = "registro-input"
                                     name="inmobiliaria.rut"
                                     type="text"
                                     placeholder="RUT"
                                     value={form.inmobiliaria.rut}
                                     onChange={handleChange}
-                                    required
                                 />
                                 <input
+                                    className = "registro-input"
                                     name="inmobiliaria.direccion"
                                     type="text"
                                     placeholder="Dirección"
                                     value={form.inmobiliaria.direccion}
                                     onChange={handleChange}
-                                    required
                                 />
-                            </>
+                            </div>
                         )}
+                        </div>
+                        </div>
 
-                        <button type="submit">Registrar</button>
+
+                        <button type="submit" className='login_modal-button'>Registrar</button>
                     </form>
                 )}
                 <button className="volver-login" onClick={() => navigate('/login')}>

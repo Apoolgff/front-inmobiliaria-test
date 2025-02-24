@@ -10,44 +10,99 @@
     height: 100%;
     background-color:rgba(0, 0, 0, 0.53);
     display: flex;
+    flex-direction:column;
     align-items: center;
     justify-content: center;
-    
+    color: white;
 }
 
 .registro_hero-titulo {
     color: white;
-    font-family: 'boska-regular'
+    font-family: 'boska-regular';
+    letter-spacing: 2px; /* Separa las letras */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra leve hacia la derecha y abajo */
+    font-size: 40px;
+}
+.registro_hero-subtitulo {
+    font-size: 20px;
+}
+.registro_hero-boton {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding:10px 20px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    cursor:pointer;
+}
+.registro_hero-boton:hover {
+background-color:rgb(23, 93, 104);
 }
 .registro-container {
-    max-width: 400px;
+    max-width: 600px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
 }
+.registro-container-titulo {
+  margin: auto;
+}
 
 .tipo-selector {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.tipo-selector label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+.tipo-selector input[type="radio"] {
+    display: none; /* Oculta los radio buttons */
+    
 }
 
-.tipo-selector input[type="radio"] {
-    margin-right: 5px;
+.tipo-selector label {
+    text-transform: capitalize;
+    color: black;
+    padding: 12px 20px 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    
+    text-align: center;
+    flex: 1;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    transition: all 0.3s ease-in-out;
+    border: 1px solid white;
+}
+.tipo-selector label:hover {
+    border: 1px solid teal;
+}
+
+/* Estilo cuando el radio está seleccionado */
+.tipo-selector input[type="radio"]:checked + label {
+    background-color: teal;
+    color: white;
+    padding: 12px 20px 8px 20px;
+    border: 1px solid teal;
 }
 
 .form-container {
     margin-top: 20px;
 }
 
-
+.registro-form-secciones {
+    display:flex;
+    gap:1rem;
+    justify-content: space-around
+}
+.registro-form-usuario {
+    width:50%
+}
+.registro-form-inmobiliaria{
+    width:50%
+}
 
 
 
@@ -67,3 +122,26 @@
     background-color: #0056b3;
 }
 
+.inmobiliaria-fields {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.inmobiliaria-fields.visible {
+    display: block;
+    opacity: 1;
+}
+
+
+.registro-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+}
+.registro-input:focus {
+    border: 1px solid teal;
+    outline: none;
+}
