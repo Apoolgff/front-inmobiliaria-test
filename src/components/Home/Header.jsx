@@ -4,11 +4,12 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import './Header.css';
 import { useAuth } from '../../services/authContext';
-import Buscador from '../utils/SearchBar'
+import Buscador from '../utils/SearchBar';
 Modal.setAppElement('#root');
 
 const Header = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showRegistroModal, setShowRegistroModal] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -27,7 +28,7 @@ const Header = () => {
 
             if (response.status === 200) {
                 setIsAuthenticated(true);
-                setShowModal(false);
+                setShowLoginModal(false);
                 window.location.replace('/dashboard');
             }
         } catch (err) {
@@ -45,7 +46,12 @@ const Header = () => {
                 </div>
                 <div className='home_login'>
                     <p>Publica una propiedad</p>
-                    <img className='home_logo-login' src="/icons/user.png" alt="" onClick={() => setShowModal(true)} />
+                    <img 
+                        className='home_logo-login' 
+                        src="/icons/user.png" 
+                        alt="" 
+                        onClick={() => setShowLoginModal(true)} 
+                    />
                 </div>
             </header>
 
@@ -84,23 +90,23 @@ const Header = () => {
                 </article>
             </section>
 
+            {/* Modal de Login */}
             <Modal 
-                isOpen={showModal} 
-                onRequestClose={() => setShowModal(false)}
+                isOpen={showLoginModal} 
+                onRequestClose={() => setShowLoginModal(false)}
                 contentLabel="Login Modal"
                 className="modal-content"
                 overlayClassName="modal-overlay"
             >
                 <div className="login_modal-container">
-                <div className='home_logo'>
-                    <img src="/icons/whale.png" alt="" />
-                    <p className='home_logo-title'>Lotesde<span>mar</span></p>
-                </div>
-                <p>Inicia Sesion</p>
-                <p className="login_modal-pregunta">¿Necesitas una cuenta en Lotes de Mar? </p> 
-                <Link to="/registro" className="registro_modal-link">Crea una cuenta</Link>
+                    <div className='home_logo'>
+                        <img src="/icons/whale.png" alt="" />
+                        <p className='home_logo-title'>Lotesde<span>mar</span></p>
+                    </div>
+                    <p>Inicia Sesión</p>
+                    <p className="login_modal-pregunta">¿Necesitas una cuenta en Lotes de Mar? </p> 
+                    <span className="registro_modal-link" onClick={() => { setShowLoginModal(false); setShowRegistroModal(true); }}>Crea una cuenta</span>
                     <form onSubmit={handleLogin} className="login_modal-form">
-                       
                         <input className='login_modal-input'
                             type="email"
                             placeholder="Email"
@@ -118,6 +124,32 @@ const Header = () => {
                         {error && <p className="error-message">{error}</p>}
                         <button className='login_modal-button ' type="submit">Iniciar Sesión</button>
                         <p>¿Olvidaste la contraseña?</p>
+                    </form>
+                </div>
+            </Modal>
+
+            {/* Modal de Registro */}
+            <Modal 
+                isOpen={showRegistroModal} 
+                onRequestClose={() => setShowRegistroModal(false)}
+                contentLabel="Registro Modal"
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <div className="login_modal-container">
+                    <div className='home_logo'>
+                        <img src="/icons/whale.png" alt="" />
+                        <p className='home_logo-title'>Lotesde<span>mar</span></p>
+                    </div>
+                    <p>Regístrate</p>
+                    <p className="login_modal-pregunta">¿Ya tienes una cuenta?</p> 
+                    <span className="registro_modal-link" onClick={() => { setShowRegistroModal(false); setShowLoginModal(true); }}>Inicia sesión</span>
+                    {/* Aquí puedes agregar el formulario de registro */}
+                    <form className="login_modal-form">
+                        <input className='login_modal-input' type="text" placeholder="Nombre" required />
+                        <input className='login_modal-input' type="email" placeholder="Email" required />
+                        <input className='login_modal-input' type="password" placeholder="Password" required />
+                        <button className='login_modal-button ' type="submit">Registrarse</button>
                     </form>
                 </div>
             </Modal>
