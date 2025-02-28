@@ -21,7 +21,7 @@
     margin-right: 15px;
 }
 
-.user-navbar a, .logout-button-link {
+.home_logo-link, .logout-button-link {
     text-decoration: none;
     color: teal; /* Color del enlace */
     font-size: 16px;
@@ -30,7 +30,7 @@
     border: none;
 }
 
-.user-navbar a:hover, .logout-button-link:hover {
+.home_logo-link:hover, .logout-button-link:hover {
     color:rgb(32, 89, 104); /* Color de hover */
 }
 

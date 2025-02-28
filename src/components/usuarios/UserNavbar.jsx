@@ -12,7 +12,7 @@ const UserNavbar = () => {
         try {
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}/cuentas/logout`, {}, { withCredentials: true });
             setIsAuthenticated(false);  // Actualiza el estado de autenticación
-            window.location.replace('/login'); // Redirige al login y recarga la página
+            window.location.replace('/'); // Redirige al login y recarga la página
         } catch (err) {
             setError('Error al cerrar sesión');
         }
@@ -20,19 +20,19 @@ const UserNavbar = () => {
 
     return (
         <nav className="user-navbar">
-             <div className='home_logo'>
+             <Link to="/"  className='home_logo'>
                 <img src="/icons/whale.png" alt="" />
                 <p className='home_logo-title'>Lotesde<span>mar</span></p>
-            </div>
+            </Link>
             <ul>
                 <li>
-                    <Link to="/dashboard">Inicio</Link>
+                    <Link to="/dashboard" className='home_logo-link'>Inicio</Link>
                 </li>
                 <li>
-                    <Link to="/publicar">Agregar Propiedad</Link>
+                    <Link to="/publicar" className='home_logo-link'>Agregar Propiedad</Link>
                 </li>
                 <li>
-                    <Link to="/ver-publicaciones">Ver Publicaciones</Link>
+                    <Link to="/ver-publicaciones" className='home_logo-link'>Ver Publicaciones</Link>
                 </li>
                 <li>
                     {/* El botón de logout ahora se ve como un enlace */}
