@@ -13,7 +13,7 @@ const SearchBar = () => {
                 <div className='home_hero_filters'> 
                     <button className='home_hero_filters-button' type="submit">Venta</button>
                     <button className='home_hero_filters-button' type="submit">Alquiler</button>
-                    <button className='home_hero_filters-button' type="submit">Temporal</button>
+                    
                 </div>
                 <form className='home_hero_search_form' action="#">
                     <input className='home_hero_search_form-input'  type="text" placeholder="Search.." name="search"></input>

@@ -42,7 +42,7 @@
 
 @font-face {
   font-family: 'khula-extrabold';
-  src: url('../public/fonts/Khula-ExtraBold.ttf') format('truetype');
+  src: url('/fonts/Khula-ExtraBold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -60,13 +60,13 @@
 }
 @font-face {
   font-family: 'chillax-semibold';
-  src: url('/public/fonts/Chillax-Semibold.otf') format('truetype');
+  src: url('/fonts/Chillax-Semibold.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'chillax-bold';
-  src: url('/public/fonts/Chillax-Bold.otf') format('truetype');
+  src: url('/fonts/Chillax-Bold.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

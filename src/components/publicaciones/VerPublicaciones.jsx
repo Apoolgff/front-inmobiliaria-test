@@ -7,8 +7,13 @@ import './VerPublicaciones.css';
 import { Link } from 'react-router-dom';
 import Filtros from '../Filtros';
 import Buscador from '../Buscador';
+import { useRef } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Navegador from '../Home/Navegador';
 
 const VerPublicaciones = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
   const { isAuthenticated } = useAuth();
   const [publicaciones, setPublicaciones] = useState([]);
   const [filteredPublicaciones, setFilteredPublicaciones] = useState([]);
@@ -20,6 +25,14 @@ const VerPublicaciones = () => {
     alquiler: false,
   });
   const [searchQuery, setSearchQuery] = useState('');
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    if (dropdownRef.current) {
+      dropdownRef.current.click(); // Simula un clic para cerrarlo si está abierto
+    }
+  };
+
 
   useEffect(() => {
     const fetchPublicaciones = async () => {
@@ -80,18 +93,70 @@ const VerPublicaciones = () => {
 
   return (
     <div>
-      {isAuthenticated ? <UserNavbar /> : <Navbar />}
+      {isAuthenticated ? <UserNavbar /> : <Navegador />}
       <div className="ver-publicaciones-container">
        
         <main className="publicaciones-main">
           <div className="publicaciones-botones">
             <Buscador onSearch={setSearchQuery} />
-            <button className="publicaciones-boton drop">Tipo de operacion</button>
-            <button className="publicaciones-boton drop">Tipo de propiedad</button>
-            <button className="publicaciones-boton drop">Caracteristicas</button>
-            <button className="publicaciones-boton">Precio</button>
-            <button className="publicaciones-boton">Ver mapa</button>
-            <button className="publicaciones-boton">Ordenar por</button>
+            <Dropdown>
+              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
+                Tipo de operación
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown>
+              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
+              Caracteristicas
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Proyectos</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Terrenos</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Casas</Dropdown.Item>
+                <Dropdown.Item href="#/action-4">Apartamentos</Dropdown.Item>
+                <Dropdown.Item href="#/action-5">Chacras</Dropdown.Item>
+                <Dropdown.Item href="#/action-6">Campos</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown>
+              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
+              Precio
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown>
+              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
+              Ver mapa
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown>
+              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
+              Ordenar por
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
          
           <div className="publicaciones-container">

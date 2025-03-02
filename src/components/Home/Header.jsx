@@ -8,6 +8,7 @@ import LoginModal from '../modales/LoginModal';
 import RegistroModal from '../modales/RegistroModal';
 import Navegador from './Navegador'
 import UserNavbar from '../usuarios/UserNavbar';
+import HomeFilters from './HomeFilters';
 
 const Header = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -24,35 +25,7 @@ const Header = () => {
                 <Buscador />
             </section>
 
-            <section className='home_filters'>
-                <h2 className='home_filters-title'>Busca rápidamente según tus preferencias</h2>
-                <article className='home_filters_article'>
-                    <Link className='home_filters_article-links' to='#'>
-                        <img src="/icons/project.png" alt="" />
-                        Proyectos
-                    </Link>
-                    <Link className='home_filters_article-links' to='#'>
-                        <img src="/icons/tree.png" alt="" />
-                        Terrenos
-                    </Link>
-                    <Link className='home_filters_article-links' to='#'>
-                        <img src="/icons/house.png" alt="" />
-                        Casas
-                    </Link>
-                    <Link className='home_filters_article-links' to='#'>
-                        <img src="/icons/apartment.png" alt="" />
-                        Apartamentos
-                    </Link>
-                    <Link className='home_filters_article-links' to='#'>
-                        <img src="/icons/grass.png" alt="" />
-                        Chacras
-                    </Link>
-                    <Link className='home_filters_article-links' to='#'>
-                        <img src="/icons/soil.png" alt="" />
-                        Campos
-                    </Link>
-                </article>
-            </section>
+            < HomeFilters />
 
             {/* Modales */}
             <LoginModal 

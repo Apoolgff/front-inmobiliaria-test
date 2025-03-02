@@ -17,10 +17,10 @@ const Navegador = ({ onLoginClick }) => {
 
     return (
         <header className='home_header'>
-            <div className='home_logo'>
-                <img src="/icons/whale.png" alt="Logo" />
+             <Link to="/"  className='home_logo'>
+                <img src="/icons/whale.png" alt="" />
                 <p className='home_logo-title'>Lotesde<span>mar</span></p>
-            </div>
+            </Link>
             <div className='home_login'>
                 <p>Publica una propiedad</p>
                 <div className='home_user-container'>
