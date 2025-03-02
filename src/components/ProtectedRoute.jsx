@@ -17,12 +17,12 @@ const ProtectedRoute = ({ children }) => {
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />;
     }
     if (sessionExpired) {
     alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
     setSessionExpired(false); // Reinicia el estado
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
 }
 
 

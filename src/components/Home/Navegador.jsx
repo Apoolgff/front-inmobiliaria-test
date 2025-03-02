@@ -1,56 +1,68 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css'; 
+import './Navegador.css'; 
 import { useAuth } from '../../services/authContext';
+import Dropdown from 'react-bootstrap/Dropdown';
 
-const Navegador = ({ onLoginClick }) => {
+const Navegador = ({ onLoginClick, onRegistroClick }) => {
+    const [error, setError] = useState('');
     const { isAuthenticated, logout } = useAuth(); 
     const [showDropdown, setShowDropdown] = useState(false);
 
-    const handleUserClick = () => {
+    const handleLoginClick = () => {
         if (isAuthenticated) {
             setShowDropdown(!showDropdown);
         } else {
             onLoginClick();
         }
     };
+    const handleRegistroClick = () => {
+        if (isAuthenticated) {
+            setShowDropdown(!showDropdown);
+        } else {
+            onRegistroClick();
+        }
+    };
 
     return (
         <header className='home_header'>
              <Link to="/"  className='home_logo'>
-                <img src="/icons/whale.png" alt="" />
+                <img src="/icons/whale.png" alt="logo-lotesdelmar" />
                 <p className='home_logo-title'>Lotesde<span>mar</span></p>
             </Link>
+            <nav>
+                <ul className='home_nav'>
+                    <li>
+                    <Link to="/ver-publicaciones" className='home_nav-link'>Venta</Link>
+                    </li>
+                    <li>
+                    <Link to="/ver-publicaciones" className='home_nav-link'>Alquiler</Link>
+                    </li>
+                    <li>
+                    <Link to="/ver-publicaciones" className='home_nav-link'>Inmobiliarias</Link>
+                    </li>
+                </ul>
+            </nav>
             <div className='home_login'>
-                <p>Publica una propiedad</p>
-                <div className='home_user-container'>
-                    {isAuthenticated ? (
-                        // Cuando el usuario está autenticado, cambia todo el botón
-                        <div className="user_logged-in" onClick={handleUserClick}>
+            <Link to="/" className='home_logo-link'>Publica una propiedad</Link>
+                <Dropdown>
+                    <Dropdown.Toggle className='home_user-container'>
                             <img 
                                 className='home_logo-login' 
                                 src="/icons/user.png" 
-                                alt="Usuario" 
+                                alt="Login" 
+                            
                             />
-                            <p className="user_name">Mi cuenta</p>
-                            {showDropdown && (
-                                <div className="user_dropdown">
-                                    <Link to="/dashboard" className="dropdown-item">Dashboard</Link>
-                                    <button onClick={logout} className="dropdown-item">Cerrar sesión</button>
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        // Botón original si no está autenticado
-                        <img 
-                            className='home_logo-login' 
-                            src="/icons/user.png" 
-                            alt="Login" 
-                            onClick={handleUserClick} 
-                        />
-                    )}
-                </div>
-            </div>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className='home_logo-drop'>
+                        <Dropdown.Item onClick={handleLoginClick}>Ingresar</Dropdown.Item>
+                        <Dropdown.Item onClick={handleRegistroClick}>Registrarse</Dropdown.Item>
+                    </Dropdown.Menu>
+              </Dropdown>
+
+            </div >
+            {error && <p className="error-message">{error}</p>}
+            
         </header>
     );
 };

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar';
+
 import UserNavbar from '../usuarios/UserNavbar';
 import { useAuth } from '../../services/authContext';
 import './VerPublicaciones.css';
 import { Link } from 'react-router-dom';
 import Filtros from '../Filtros';
 import Buscador from '../Buscador';
-import { useRef } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+
 import Navegador from '../Home/Navegador';
 
 const VerPublicaciones = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
+  
   const { isAuthenticated } = useAuth();
   const [publicaciones, setPublicaciones] = useState([]);
   const [filteredPublicaciones, setFilteredPublicaciones] = useState([]);
@@ -25,13 +24,9 @@ const VerPublicaciones = () => {
     alquiler: false,
   });
   const [searchQuery, setSearchQuery] = useState('');
-  const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => {
-    if (dropdownRef.current) {
-      dropdownRef.current.click(); // Simula un clic para cerrarlo si está abierto
-    }
-  };
+
+
 
 
   useEffect(() => {

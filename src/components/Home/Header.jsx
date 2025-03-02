@@ -17,7 +17,10 @@ const Header = () => {
 
     return (
         <>
-            {isAuthenticated ? <UserNavbar /> : <Navegador onLoginClick={() => setShowLoginModal(true)} />}
+            {isAuthenticated ? <UserNavbar /> : 
+            <Navegador onLoginClick={() => setShowLoginModal(true)}
+             onRegistroClick={() => setShowRegistroModal(true)}
+                />}
 
 
             <section className='home_hero'>
