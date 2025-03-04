@@ -4,7 +4,7 @@ import PublicarCasa from "./PublicarCasa";
 import PublicarChacra from "./PublicarChacra";
 import PublicarTerreno from "./PublicarTerreno";
 import PublicarLocal from "./PublicarLocal";
-import UserNavbar from "../usuarios/UserNavbar";
+import UserNavbar from "../Navegadores/UserNavbar";
 import "./Publicar.css"; // Asegúrate de tener estilos adecuados
 
 const Publicar = () => {

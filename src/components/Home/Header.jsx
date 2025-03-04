@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import { useAuth } from '../../services/authContext';
 
-import Buscador from '../utils/SearchBar';
+import Buscador from '../Buscador'
 import LoginModal from '../modales/LoginModal';
 import RegistroModal from '../modales/RegistroModal';
-import Navegador from './Navegador'
-import UserNavbar from '../usuarios/UserNavbar';
+import Navegador from '../Navegadores/Navegador'
+import UserNavbar from '../Navegadores/UserNavbar';
 import HomeFilters from './HomeFilters';
 
 const Header = () => {
@@ -21,7 +21,6 @@ const Header = () => {
             <Navegador onLoginClick={() => setShowLoginModal(true)}
              onRegistroClick={() => setShowRegistroModal(true)}
                 />}
-
 
             <section className='home_hero'>
                 <h1 className='home_hero-title'>Tu proxima propiedad cerca del mar esta aqui</h1>

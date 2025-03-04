@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import UserNavbar from '../usuarios/UserNavbar'
+import UserNavbar from '../Navegadores/UserNavbar'
 import './VerPropiedad.css'
 
 const VerPropiedad = () => {

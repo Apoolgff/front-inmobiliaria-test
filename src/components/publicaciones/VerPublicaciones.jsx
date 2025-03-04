@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import UserNavbar from '../usuarios/UserNavbar';
+import UserNavbar from '../Navegadores/UserNavbar';
 import { useAuth } from '../../services/authContext';
 import './VerPublicaciones.css';
 import { Link } from 'react-router-dom';
@@ -9,8 +9,9 @@ import Filtros from '../Filtros';
 import Buscador from '../Buscador';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import Navegador from '../Home/Navegador';
-
+import NavBuscador from '../Navegadores/NavBuscador';
+import LoginModal from '../modales/LoginModal';
+import RegistroModal from '../modales/RegistroModal';
 const VerPublicaciones = () => {
   
   const { isAuthenticated } = useAuth();
@@ -24,7 +25,8 @@ const VerPublicaciones = () => {
     alquiler: false,
   });
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegistroModal, setShowRegistroModal] = useState(false);
 
 
 
@@ -88,72 +90,12 @@ const VerPublicaciones = () => {
 
   return (
     <div>
-      {isAuthenticated ? <UserNavbar /> : <Navegador />}
+      {isAuthenticated ? <UserNavbar /> : <NavBuscador onLoginClick={() => setShowLoginModal(true)}
+          onRegistroClick={() => setShowRegistroModal(true)} />}
       <div className="ver-publicaciones-container">
        
         <main className="publicaciones-main">
-          <div className="publicaciones-botones">
-            <Buscador onSearch={setSearchQuery} />
-            <Dropdown>
-              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
-                Tipo de operación
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
-              Caracteristicas
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Proyectos</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Terrenos</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Casas</Dropdown.Item>
-                <Dropdown.Item href="#/action-4">Apartamentos</Dropdown.Item>
-                <Dropdown.Item href="#/action-5">Chacras</Dropdown.Item>
-                <Dropdown.Item href="#/action-6">Campos</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
-              Precio
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
-              Ver mapa
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle className="publicaciones-boton" id="dropdown-basic">
-              Ordenar por
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Venta</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Alquiler</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Alquiler temporario</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-         
+      
           <div className="publicaciones-container">
             {filteredPublicaciones.length > 0 ? (
               filteredPublicaciones.map((publicacion) => (
@@ -220,6 +162,22 @@ const VerPublicaciones = () => {
           
         </main>
       </div>
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToRegister={() => {
+          setShowLoginModal(false);
+          setShowRegistroModal(true);
+        }}
+      />
+      <RegistroModal
+        isOpen={showRegistroModal}
+        onClose={() => setShowRegistroModal(false)}
+        onSwitchToLogin={() => {
+          setShowRegistroModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </div>
   );
 };

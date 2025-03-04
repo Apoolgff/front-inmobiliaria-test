@@ -30,19 +30,7 @@ const Navegador = ({ onLoginClick, onRegistroClick }) => {
                 <img src="/icons/whale.png" alt="logo-lotesdelmar" />
                 <p className='home_logo-title'>Lotesde<span>mar</span></p>
             </Link>
-            <nav>
-                <ul className='home_nav'>
-                    <li>
-                    <Link to="/ver-publicaciones" className='home_nav-link'>Venta</Link>
-                    </li>
-                    <li>
-                    <Link to="/ver-publicaciones" className='home_nav-link'>Alquiler</Link>
-                    </li>
-                    <li>
-                    <Link to="/ver-publicaciones" className='home_nav-link'>Inmobiliarias</Link>
-                    </li>
-                </ul>
-            </nav>
+        
             <div className='home_login'>
             <Link to="/" className='home_logo-link'>Publica una propiedad</Link>
                 <Dropdown>

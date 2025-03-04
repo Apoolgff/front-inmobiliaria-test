@@ -1,7 +1,7 @@
 // src/components/Dashboard.js
 import React, { useEffect } from 'react';
 import { useAuth } from '../../services/authContext'; // Importa el hook useAuth
-import UserNavbar from './UserNavbar'; // Importa UserNavbar
+import UserNavbar from '../Navegadores/UserNavbar'
 
 const Dashboard = () => {
     const { userData, loading, error, setUserData } = useAuth(); // Accede al userData desde el contexto

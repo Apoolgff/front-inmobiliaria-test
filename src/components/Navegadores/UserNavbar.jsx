@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/authContext';
 import axios from 'axios';
-import '../Home/Navegador.css'
+import './Navegador.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
@@ -27,19 +27,7 @@ const UserNavbar = () => {
                 <img src="/icons/whale.png" alt="logo-lotesdelmar"/>
                 <p className='home_logo-title'>Lotesde<span>mar</span></p>
             </Link>
-            <nav>
-                           <ul className='home_nav'>
-                               <li>
-                               <Link to="/ver-publicaciones" className='home_nav-link'>Venta</Link>
-                               </li>
-                               <li>
-                               <Link to="/ver-publicaciones" className='home_nav-link'>Alquiler</Link>
-                               </li>
-                               <li>
-                               <Link to="/ver-publicaciones" className='home_nav-link'>Inmobiliarias</Link>
-                               </li>
-                           </ul>
-                       </nav>
+           
             <div className='home_login'>
             <Link to="/publicar" className='home_logo-link'>Publica una propiedad</Link>
                 <Dropdown>
@@ -51,11 +39,10 @@ const UserNavbar = () => {
                             
                             />
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu className='home_logo-drop'>
                         <Dropdown.Item ><Link to="/dashboard">Inicio</Link></Dropdown.Item>
-                        <Dropdown.Item ></Dropdown.Item>
                         <Dropdown.Item ><Link to="/ver-publicaciones" >Ver Publicaciones</Link></Dropdown.Item>
-                        <Dropdown.Item ><button onClick={handleLogout} >Cerrar sesión</button></Dropdown.Item>
+                        <Dropdown.Item onClick={handleLogout}>Cerrar sesión</Dropdown.Item>
                     </Dropdown.Menu>
               </Dropdown>
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './VerPublicacion.css';
 import Navbar from '../Navbar';
-import UserNavbar from '../usuarios/UserNavbar';  // Importar UserNavbar
+import UserNavbar from "../Navegadores/UserNavbar"; // Importar UserNavbar
 import { useAuth } from '../../services/authContext';  // Importar el hook useAuth
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';

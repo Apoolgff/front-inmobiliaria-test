@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CrearPropiedad.css';
-import UserNavBar from '../usuarios/UserNavbar';
+import UserNavBar from '../Navegadores/UserNavbar';
 import { useAuth } from '../../services/authContext';
 
 const CrearPropiedad = () => {

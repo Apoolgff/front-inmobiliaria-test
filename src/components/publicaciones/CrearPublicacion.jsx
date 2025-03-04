@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../services/authContext';
 import './CrearPublicacion.css';
-import UserNavbar from '../usuarios/UserNavbar'
+import UserNavbar from '../Navegadores/UserNavbar'
 
 const CrearPublicacion = () => {
     const { userData } = useAuth();
