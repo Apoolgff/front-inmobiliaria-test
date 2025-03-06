@@ -4,7 +4,7 @@ border-radius: 50px;
 -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
-width:400px;
+width:450px;
 height: 3rem;
 border: solid 1px white;
 background-color: white
@@ -40,3 +40,61 @@ width:20px;
 .buscador-container:hover {
     border: solid 1px teal;
 }
+
+/* From Uiverse.io by cbolson */ 
+.selector-background {
+    position: absolute;
+    width: 52%;
+    height: 100%;
+    background-color: teal;
+    border-radius: 40px;
+    transition: left 0.3s ease-in-out;
+}
+
+.buscador-selector {
+    position: relative;
+    display: flex;
+    background-color: rgb(163, 197, 193);
+    border-radius: 40px;
+    margin: 4px;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+}
+
+ 
+ .buscador-selector input[type="radio"] {
+    display: none; /* Oculta los radio buttons */
+ }
+ 
+ .buscador-selector label {
+    text-transform: capitalize;
+    color: white;
+    height:100%;
+    
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    flex: 1;
+    transition: all 0.3s ease-in-out;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding-top:2px;
+    z-index:2;
+ }
+
+ 
+ /* Estilo cuando el radio está seleccionado */
+ .buscador-selector input[type="radio"]:checked + label {
+  
+    color: white;
+    
+   
+ }
+ 
+ 
+

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import UserNavbar from '../Navegadores/UserNavbar';
+import UserNavBuscador from '../Navegadores/UserNavBuscador';
 import { useAuth } from '../../services/authContext';
 import './VerPublicaciones.css';
 import { Link } from 'react-router-dom';
 import Filtros from '../Filtros';
-import Buscador from '../Buscador';
+
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import NavBuscador from '../Navegadores/NavBuscador';
@@ -90,7 +90,7 @@ const VerPublicaciones = () => {
 
   return (
     <div>
-      {isAuthenticated ? <UserNavbar /> : <NavBuscador onLoginClick={() => setShowLoginModal(true)}
+      {isAuthenticated ? <UserNavBuscador /> : <NavBuscador onLoginClick={() => setShowLoginModal(true)}
           onRegistroClick={() => setShowRegistroModal(true)} />}
       <div className="ver-publicaciones-container">
        

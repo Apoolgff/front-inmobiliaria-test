@@ -5,26 +5,26 @@ import { useAuth } from '../../services/authContext';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Buscador from '../Buscador'
 import { Swiper, SwiperSlide } from "swiper/react";
+import axios from 'axios';
 
-const NavBuscador = ({ onLoginClick, onRegistroClick }) => {
+const UserNavBuscador = () => {
     const [error, setError] = useState('');
-    const { isAuthenticated, logout } = useAuth(); 
-    const [showDropdown, setShowDropdown] = useState(false);
-   const [searchQuery, setSearchQuery] = useState('');
-    const handleLoginClick = () => {
-        if (isAuthenticated) {
-            setShowDropdown(!showDropdown);
-        } else {
-            onLoginClick();
+    const { setIsAuthenticated, userData } = useAuth(); 
+    
+    const [searchQuery, setSearchQuery] = useState('');
+
+  
+
+    const handleLogout = async () => {
+        try {
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/cuentas/logout`, {}, { withCredentials: true });
+            setIsAuthenticated(false);  // Actualiza el estado de autenticación
+            window.location.replace('/'); // Redirige al login y recarga la página
+        } catch (err) {
+            setError('Error al cerrar sesión');
         }
     };
-    const handleRegistroClick = () => {
-        if (isAuthenticated) {
-            setShowDropdown(!showDropdown);
-        } else {
-            onRegistroClick();
-        }
-    };
+
 
     return (
         <header className='header_publicaciones'>
@@ -36,20 +36,21 @@ const NavBuscador = ({ onLoginClick, onRegistroClick }) => {
                 <Buscador  onSearch={setSearchQuery}/>
                 <div className='home_login'>
                 <Link to="/" className='home_logo-link'>Publica una propiedad</Link>
-                    <Dropdown>
-                        <Dropdown.Toggle className='home_user-container'>
-                                <img 
-                                    className='home_logo-login' 
-                                    src="/icons/user.png" 
-                                    alt="Login" 
-                                
-                                />
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu className='home_logo-drop'>
-                            <Dropdown.Item onClick={handleLoginClick}>Ingresar</Dropdown.Item>
-                            <Dropdown.Item onClick={handleRegistroClick}>Registrarse</Dropdown.Item>
-                        </Dropdown.Menu>
-                </Dropdown>
+                <Dropdown>
+                    <Dropdown.Toggle className='home_user-container'>
+                            <img 
+                                className='home_logo-login' 
+                                src="/icons/user.png" 
+                                alt="Login" 
+                            
+                            />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className='home_logo-drop'>
+                        <Dropdown.Item ><Link to="/dashboard">Inicio</Link></Dropdown.Item>
+                        <Dropdown.Item ><Link to="/ver-publicaciones" >Ver Publicaciones</Link></Dropdown.Item>
+                        <Dropdown.Item onClick={handleLogout}>Cerrar sesión</Dropdown.Item>
+                    </Dropdown.Menu>
+              </Dropdown>
 
                 </div >
             </div>
@@ -166,4 +167,4 @@ const NavBuscador = ({ onLoginClick, onRegistroClick }) => {
     );
 };
 
-export default NavBuscador;
+export default UserNavBuscador;

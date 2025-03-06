@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
 
-            if (window.location.pathname !== "/login" && window.location.pathname !== "/") {
+            if (window.location.pathname !== "/") {
                 try {
                     const response = await axios.get(
                         `${import.meta.env.VITE_BACKEND_URL}/cuentas/current`,
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
                     console.error('Error al verificar token:', err);
                     setIsAuthenticated(false); 
                     setUserData(null); 
-                    window.location.href = '/login'; 
+                    window.location.href = '/'; 
                 }
             }
             setLoading(false); 
